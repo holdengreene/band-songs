@@ -1,0 +1,9 @@
+{
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "vue"
+    ],
+    "editor.tabSize": 2,
+    "prettier.stylelintIntegration": false
+}
