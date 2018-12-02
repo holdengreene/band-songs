@@ -9,13 +9,12 @@ module.exports = {
   },
   extends: ['plugin:vue/recommended'],
   // required to lint *.vue files
-  plugins: ['vue', 'prettier'],
+  plugins: ['vue'],
   // add your custom rules here
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'vue/max-attributes-per-line': 'off',
-    'vue/attributes-order': 'off',
-    'vue/html-self-closing': 'off'
+    'vue/attributes-order': 'off'
   }
-};
+}
