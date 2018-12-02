@@ -14,9 +14,12 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
-    "@nuxtjs/bulma": "^1.2.1",
+    "bulma": "^0.7.2",
     "cross-env": "^5.2.0",
-    "nuxt": "^2.3.4"
+    "node-sass": "^4.10.0",
+    "nuxt": "^2.3.4",
+    "nuxt-sass-resources-loader": "^2.0.5",
+    "sass-loader": "^7.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
