@@ -2,7 +2,7 @@
   <nav class="menu">
     <div class="container">
       <div class="menu__title">
-        <a href="/">PPK</a>
+        <nuxt-link to="/">PPK</nuxt-link>
       </div>
     </div>
   </nav>

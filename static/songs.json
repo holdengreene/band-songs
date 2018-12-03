@@ -1,0 +1,27 @@
+{
+  "test-song": {
+    "title": "Test Song",
+    "chords": "Am C G",
+    "friendly-name": "test-song"
+  },
+  "a-different-song": {
+    "title": "A different Song",
+    "chords": "Am Em",
+    "friendly-name": "a-different-song"
+  },
+  "lets-not": {
+    "title": "Let's Not",
+    "chords": "Am Em C G F Am",
+    "friendly-name": "lets-not"
+  },
+  "hit-me-again": {
+    "title": "Hit Me Again",
+    "chords": "E G#m A B",
+    "friendly-name": "hit-me-again"
+  },
+  "true-truant": {
+    "title": "True Truant",
+    "chords": "Gb Cb Abm Ebm",
+    "friendly-name": "true-truant"
+  }
+}
