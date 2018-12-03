@@ -14,35 +14,20 @@
 
 <script>
 import SongCard from '~/components/SongCard.vue'
+import axios from 'axios'
 
 export default {
   components: {
     SongCard
   },
-  data() {
-    return {
-      songs: [
-        {
-          title: 'Test Song',
-          chords: 'Am C G'
-        },
-        {
-          title: 'A different Song',
-          chords: 'Am Em'
-        },
-        {
-          title: "Let's Not",
-          chords: 'Am Em C G F Am'
-        },
-        {
-          title: 'Hit Me Again',
-          chords: 'E G#m A B'
-        },
-        {
-          title: 'True Truant',
-          chords: 'Gb Cb Abm Ebm'
-        }
-      ]
+  async asyncData() {
+    try {
+      const songsJson = `http://localhost:3000/songs.json`
+      const { data } = await axios.get(songsJson)
+
+      return { songs: data }
+    } catch (e) {
+      throw new Error(e)
     }
   }
 }

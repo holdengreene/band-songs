@@ -5,12 +5,10 @@
       <p class="subtitle">{{ song.chords }}</p>
     </div>
     <footer class="card-footer">
-      <p class="card-footer-item">
+      <nuxt-link :to="song.friendlyName" class="card-footer-item">
         View Song
-      </p>
-      <p class="card-footer-item">
-        Edit Song
-      </p>
+      </nuxt-link>
+      <p class="card-footer-item">Edit Song</p>
     </footer>
   </div>
 </template>
@@ -24,7 +22,7 @@ export default {
         return {}
       }
     }
-  },
+  }
 }
 </script>
 
