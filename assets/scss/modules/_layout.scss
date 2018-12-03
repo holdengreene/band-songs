@@ -1,4 +1,13 @@
 // Layout
-@import "node_modules/bulma/sass/utilities/_all";
-@import "node_modules/bulma/sass/grid/columns";
-@import "node_modules/bulma/sass/elements/container";
+@import 'node_modules/bulma/sass/utilities/_all';
+@import 'node_modules/bulma/sass/grid/columns';
+@import 'node_modules/bulma/sass/elements/container';
+
+// Components
+@import 'node_modules/bulma/sass/components/card';
+
+@media screen and (max-width: rem(1023px)) {
+  .container {
+    margin: 0 rem(20px);
+  }
+}
