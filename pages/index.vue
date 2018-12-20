@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import SongCard from '~/components/SongCard.vue'
-import axios from 'axios'
+import SongCard from '~/components/SongCard.vue';
+import axios from 'axios';
 
 export default {
   components: {
@@ -22,15 +22,15 @@ export default {
   },
   async asyncData() {
     try {
-      const songsJson = `http://localhost:3000/songs.json`
-      const { data } = await axios.get(songsJson)
+      const songsJson = `http://localhost:3000/songs.json`;
+      const { data } = await axios.get(songsJson);
 
-      return { songs: data }
+      return { songs: data };
     } catch (e) {
-      throw new Error(e)
+      throw new Error(e);
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
