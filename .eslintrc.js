@@ -17,5 +17,7 @@ module.exports = {
     'vue/max-attributes-per-line': 'off',
     'vue/attributes-order': 'off',
     'vue/html-closing-bracket-spacing': 'off',
+    'vue/singleline-html-element-content-newline': 'off',
+    'vue/component-name-in-template-casing': 'off'
   }
 }

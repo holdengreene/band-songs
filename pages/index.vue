@@ -7,7 +7,7 @@
     </div>
 
     <div class="song-grid">
-      <SongCard v-for="song in songs" :key="song.id" :song="song"/>
+      <SongCard v-for="(song, index) in songs.songs" :key="index" :song="song"/>
     </div>
   </div>
 </template>
@@ -22,8 +22,8 @@ export default {
   },
   async asyncData() {
     try {
-      const songsJson = `http://localhost:3000/songs.json`;
-      const { data } = await axios.get(songsJson);
+      const songsLists = `http://localhost:8080/bands/1/songs`;
+      const { data } = await axios.get(songsLists);
 
       return { songs: data };
     } catch (e) {
