@@ -6,8 +6,6 @@
       <p>Stop forgetting what songs you know.</p>
     </div>
 
-    <nuxt-link to="/test">Test</nuxt-link>
-
     <div class="song-grid">
       <SongCard v-for="(song) in getSongs" :key="song.id" :song="song"/>
     </div>
