@@ -9,37 +9,37 @@
     <div class="song-grid">
       <SongCard v-for="(song, index) in getSongs" :key="index" :song="song"/>
     </div>
+
+    <button type="button" @click="changeOffset()">Next</button>
     <!-- {{ songsList }} -->
   </div>
 </template>
 
 <script>
 import SongCard from '~/components/SongCard.vue';
-import axios from 'axios';
 
 export default {
   components: {
     SongCard
   },
-  data() {
-    return {
-      songsOffset: 0,
-      songsLimit: 20
-    };
-  },
-  async asyncData() {
+  async fetch({ store }) {
     try {
-      const allSongs = 'http://localhost:8080/bands/1/songs';
-      const { data } = await axios.get(allSongs);
-
-      return { songsList: data };
+      await store.dispatch('fetchSongs');
+      // Just pass the songs to the store
+      // store.commit('setSongs', data.songs);
     } catch (e) {
       throw new Error(e);
     }
   },
   computed: {
     getSongs: function() {
-      return this.songsList.songs;
+      return this.$store.state.songsList.songs;
+    }
+  },
+  methods: {
+    changeOffset: function() {
+      console.log("hello");
+      return this.$store.commit('incrementOffset', 20);
     }
   }
 };
