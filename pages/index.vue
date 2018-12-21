@@ -7,8 +7,9 @@
     </div>
 
     <div class="song-grid">
-      <SongCard v-for="(song, index) in songs.songs" :key="index" :song="song"/>
+      <SongCard v-for="(song, index) in getSongs" :key="index" :song="song"/>
     </div>
+    <!-- {{ songsList }} -->
   </div>
 </template>
 
@@ -20,14 +21,25 @@ export default {
   components: {
     SongCard
   },
+  data() {
+    return {
+      songsOffset: 0,
+      songsLimit: 20
+    };
+  },
   async asyncData() {
     try {
-      const songsLists = `http://localhost:8080/bands/1/songs`;
-      const { data } = await axios.get(songsLists);
+      const allSongs = 'http://localhost:8080/bands/1/songs';
+      const { data } = await axios.get(allSongs);
 
-      return { songs: data };
+      return { songsList: data };
     } catch (e) {
       throw new Error(e);
+    }
+  },
+  computed: {
+    getSongs: function() {
+      return this.songsList.songs;
     }
   }
 };
