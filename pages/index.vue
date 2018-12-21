@@ -6,12 +6,11 @@
       <p>Stop forgetting what songs you know.</p>
     </div>
 
-    <div class="song-grid">
-      <SongCard v-for="(song, index) in getSongs" :key="index" :song="song"/>
-    </div>
+    <nuxt-link to="/test">Test</nuxt-link>
 
-    <button type="button" @click="changeOffset()">Next</button>
-    <!-- {{ songsList }} -->
+    <div class="song-grid">
+      <SongCard v-for="(song) in getSongs" :key="song.id" :song="song"/>
+    </div>
   </div>
 </template>
 
@@ -22,24 +21,9 @@ export default {
   components: {
     SongCard
   },
-  async fetch({ store }) {
-    try {
-      await store.dispatch('fetchSongs');
-      // Just pass the songs to the store
-      // store.commit('setSongs', data.songs);
-    } catch (e) {
-      throw new Error(e);
-    }
-  },
   computed: {
     getSongs: function() {
       return this.$store.state.songsList.songs;
-    }
-  },
-  methods: {
-    changeOffset: function() {
-      console.log("hello");
-      return this.$store.commit('incrementOffset', 20);
     }
   }
 };
