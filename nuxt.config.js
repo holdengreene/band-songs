@@ -57,9 +57,7 @@ module.exports = {
         }
       }
     },
-    extractCSS: {
-      allChunks: true
-    },
+    extractCSS: true,
     /*
      ** You can extend webpack config here
      */
