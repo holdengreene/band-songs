@@ -6,18 +6,21 @@
       <p>Stop forgetting what songs you know.</p>
     </div>
 
-    <div class="song-grid">
-      <SongCard v-for="(song) in getSongs" :key="song.id" :song="song"/>
+    <div class="song-section" v-if="getSongs">
+      <h2>All The Songs</h2>
+      <ul class="song-list">
+        <SongItem v-for="song in getSongs" :key="song.id" :song="song"/>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
-import SongCard from '~/components/SongCard.vue';
+import SongItem from '~/components/SongItem.vue';
 
 export default {
   components: {
-    SongCard
+    SongItem
   },
   computed: {
     getSongs: function() {
@@ -28,42 +31,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.song-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-
-  .card {
-    margin: rem(5px);
-    width: calc(25% - #{rem(10px)});
-  }
+.song-section {
+  background-color: $off-white;
+  padding: rem(10px);
+  border: rem(1px) solid $border-dark;
 }
 
-@supports (display: grid) {
-  .song-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(rem(270px), 1fr));
-    grid-gap: rem(10px);
-
-    .card {
-      margin: 0;
-      width: 100%;
-    }
-  }
-}
-
-@media screen and (max-width: rem(1023px)) {
-  .song-grid .card {
-    width: calc(50% - #{rem(10px)});
-  }
-
-  @supports (display: grid) {
-    .song-grid {
-      .card {
-        width: 100%;
-      }
-    }
-  }
+.song-list {
+  list-style: none;
+  padding: 0 rem(25px);
 }
 </style>
 
