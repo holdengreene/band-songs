@@ -5,7 +5,6 @@
       <h2>Track The Songs</h2>
       <p>Stop forgetting what songs you know.</p>
     </div>
-
     <div class="song-section" v-if="getSongs">
       <h2>All The Songs</h2>
       <ul class="song-list">

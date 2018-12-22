@@ -5,7 +5,7 @@
       <p class="chords">Chords: <span class="chords--span">{{ getChords }}</span></p>
     </div>
     <div class="song-buttons">
-      <button>View Song</button>
+      <nuxt-link :to="song.id.toString()">View Song</nuxt-link>
     </div>
   </li>
 </template>
