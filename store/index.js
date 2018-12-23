@@ -17,9 +17,7 @@ export const mutations = {
 
 export const getters = {
   getSongById: state => id => {
-    return state.songsList.songs.find(song => {
-      return song.id === id;
-    });
+    return state.songsList.songs.find(song => song.id === id);
   }
 };
 
