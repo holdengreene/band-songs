@@ -9,7 +9,8 @@
       v-model="song.url"
       v-for="(url, index) in song.uploadUrls"
       :key="index"
-      :url="url"
+      :upload-url="{url, index}"
+      :url.sync="song.uploadUrls[index]"
     />
   </div>
 </template>

@@ -1,17 +1,24 @@
 <template>
   <div>
-    <input type="text">
+    <input type="text" @change="updateUrl()" v-model="uploadUrl.url">
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    url: {
-      type: String,
-      default: ''
+    uploadUrl: {
+      type: Object,
+      default() {
+        return {};
+      }
     }
   },
+  methods: {
+    updateUrl: function() {
+      return this.$emit('update:url', this.uploadUrl.url);
+    }
+  }
 };
 </script>
 
