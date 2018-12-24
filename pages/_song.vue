@@ -56,8 +56,15 @@ export default {
     };
   },
   // Add current song to data on page load
-  async asyncData({ params }) {
+  async asyncData({ params, query }) {
     const songId = params.song;
+    const created = query.created;
+    let isCreated = false;
+
+    if (created) {
+      isCreated = true;
+    }
+
     const currSong = `http://localhost:8080/bands/1/songs/${songId}`;
 
     try {
@@ -80,7 +87,7 @@ export default {
         return { noSong: true };
       }
 
-      return { song };
+      return { song, isCreated };
     } catch (e) {
       return { noSong: true };
     }
