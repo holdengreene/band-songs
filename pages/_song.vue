@@ -1,5 +1,6 @@
 <template>
   <div class="song-wrap" v-if="song" :class="isEditing ? 'editing' : ''">
+    <div class="song-banner">Test</div>
     <button class="song-edit" @click="isEditing = true">Edit Song</button>
     <form class="update-form" method="post" @submit.prevent="updateSong">
       <!-- Remove readonly if currently editing -->
@@ -24,15 +25,14 @@
       <UploadUrl
         class="song-urls"
         type="text"
-        v-model="song.url"
         v-for="(url, index) in song.uploadUrls"
         :key="index"
         :upload-url="{url, index, isEditing}"
         :url.sync="song.uploadUrls[index]"
       />
       <div class="form-buttons">
-        <button class="submit-song">Submit Song</button>
-        <button class="cancel-song">Cancel</button>
+        <button class="submit-song">Update Song</button>
+        <button type="button" class="cancel-song" @click="cancelChanges()">Cancel Changes</button>
       </div>
     </form>
   </div>
@@ -50,7 +50,8 @@ export default {
     return {
       isEditing: false,
       isLoading: false,
-      isSaved: false
+      isSaved: false,
+      isError: false
     };
   },
   // Add current song to data on page load
@@ -78,6 +79,22 @@ export default {
   methods: {
     updateSong: function() {
       console.log(this.song);
+    },
+    cancelChanges: async function() {
+      // Grab the song again
+      const songId = this.$route.params.song;
+      const currSong = `http://localhost:8080/bands/1/songs/${songId}`;
+
+      const {
+        data: { song }
+      } = await axios.get(currSong);
+
+      song.chords = song.chords.join(' ');
+
+      // Reset the song with the initial song
+      this.song = { ...song };
+
+      this.isEditing = false;
     }
   }
   // Get the current song from vuex at any time
@@ -112,6 +129,22 @@ export default {
 
   input {
     margin: rem(10px) 0;
+  }
+}
+
+.form-buttons {
+  display: none;
+}
+
+// Add all the styles for the editing view
+
+.editing {
+  .song-edit {
+    display: none;
+  }
+
+  .form-buttons {
+    display: block;
   }
 }
 </style>
