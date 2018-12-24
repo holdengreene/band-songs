@@ -22,14 +22,13 @@
         v-model="song.description"
         :readonly="isEditing ? false : true"
       >
-      <UploadUrl
-        class="song-urls"
-        type="text"
-        v-for="(url, index) in song.uploadUrls"
-        :key="index"
-        :upload-url="{url, index, isEditing}"
-        :url.sync="song.uploadUrls[index]"
-      />
+      <div class="url-holder" v-for="(url, index) of song.uploadUrls" :key="index">
+        <input class="song-url" type="text" v-model="url.value">
+        <button type="button" class="remove-url" @click="removeUrl(index)">X</button>
+      </div>
+
+      <button type="button" class="add-url" @click="addUrl()">Add Url</button>
+
       <div class="form-buttons">
         <button class="submit-song">Update Song</button>
         <button type="button" class="cancel-song" @click="cancelChanges()">Cancel Changes</button>
@@ -40,12 +39,8 @@
 
 <script>
 import axios from 'axios';
-import UploadUrl from '~/components/UploadUrl';
 
 export default {
-  components: {
-    UploadUrl
-  },
   data() {
     return {
       isEditing: false,
@@ -63,9 +58,17 @@ export default {
       const {
         data: { song }
       } = await axios.get(currSong);
+      let formattedUrl = [];
 
       // Split the chords up to a string
       song.chords = song.chords.join(' ');
+
+      // Format the urls correctly. Doing this makes it easier to modify
+      for (const url of song.uploadUrls) {
+        formattedUrl.push({ value: url });
+      }
+
+      song.uploadUrls = formattedUrl;
 
       if (!song) {
         return { noSong: true };
@@ -84,6 +87,16 @@ export default {
       const cleanChords = this.cleanChords(chords);
 
       const updateUrl = `http://localhost:8080/bands/1/songs/${id}/update`;
+
+      let cleanUrls = [];
+
+      // Format uploadUrls
+      if (uploadUrls.length > 0) {
+        for (const url of uploadUrls) {
+          cleanUrls.push(url.value);
+        }
+      }
+
       const {
         data: { songUpdated }
       } = await axios({
@@ -93,7 +106,7 @@ export default {
           title,
           chords: cleanChords,
           description,
-          uploadUrls
+          uploadUrls: cleanUrls
         }
       });
 
@@ -108,6 +121,12 @@ export default {
 
       // Throw an error if the state couldn't be updated
       this.isError = true;
+    },
+    addUrl: function() {
+      this.song.uploadUrls.push({ value: '' });
+    },
+    removeUrl: function(index) {
+      this.song.uploadUrls.splice(index, 1);
     },
     cancelChanges: async function() {
       // Grab the song again
@@ -136,14 +155,6 @@ export default {
       return cleanChords;
     }
   }
-  // Get the current song from vuex at any time
-  // computed: {
-  //   convertChords: function() {
-  //     // Convert the chords from an array to a string
-  //     const chords = this.song.chords.join(' ');
-  //     return this.$set(this.song, "chords", chords);
-  //   }
-  // }
 };
 </script>
 
@@ -171,7 +182,9 @@ export default {
   }
 }
 
-.form-buttons {
+.form-buttons,
+.add-url,
+.remove-url {
   display: none;
 }
 
@@ -182,7 +195,9 @@ export default {
     display: none;
   }
 
-  .form-buttons {
+  .form-buttons,
+  .add-url,
+  .remove-url {
     display: block;
   }
 }

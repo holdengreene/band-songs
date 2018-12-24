@@ -12,11 +12,12 @@
         Song Urls
         <span class="optional">- Optional</span>
       </label>
-      <div v-for="(url, index) of song.uploadUrls" :key="index">
+      <div class="url-holder" v-for="(url, index) of song.uploadUrls" :key="index">
         <input class="song-url" type="text" v-model="url.value">
+        <button type="button" class="remove-url" @click="removeUrl(index)">X</button>
       </div>
 
-      <button type="button" class="addUrl" @click="addUrl">Add Url</button>
+      <button type="button" class="add-url" @click="addUrl()">Add Url</button>
       <button class="submit-button">Create Song</button>
     </form>
   </div>
@@ -61,7 +62,7 @@ export default {
           title,
           chords: cleanChords,
           description,
-          uploadedUrls: cleanUrls
+          uploadUrls: cleanUrls
         }
       });
 
@@ -71,7 +72,9 @@ export default {
     addUrl: function() {
       this.song.uploadUrls.push({ value: '' });
     },
-    removeUrl: function() {},
+    removeUrl: function(index) {
+      this.song.uploadUrls.splice(index, 1);
+    },
     cleanChords: function(chords) {
       // Remove all commas and use a set to de-duplicate the chords
       const removeComma = chords.replace(/,/g, '');
