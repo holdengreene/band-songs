@@ -1,6 +1,12 @@
 <template>
   <div>
-    <input class="song-url" type="text" @change="updateUrl()" v-model="uploadUrl.url" :readonly="uploadUrl.isEditing ? false : true">
+    <input
+      class="song-url"
+      type="text"
+      @change="updateUrl()"
+      v-model="uploadUrl.url"
+      :readonly="uploadUrl.isEditing ? false : true"
+    >
   </div>
 </template>
 
