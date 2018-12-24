@@ -81,12 +81,7 @@ export default {
       this.isLoading = true;
       const { chords, description, title, uploadUrls, id } = this.song;
 
-      // Remove all commas and use a set to de-duplicate the chords
-      const removeComma = chords.replace(/,/g, '');
-      const dedupeChords = new Set(removeComma.split(' '));
-
-      // Have to convert it back to an array for the database
-      const cleanChords = Array.from(dedupeChords);
+      const cleanChords = this.cleanChords(chords);
 
       const updateUrl = `http://localhost:8080/bands/1/songs/${id}/update`;
       const {
@@ -129,6 +124,16 @@ export default {
       this.song = { ...song };
 
       this.isEditing = false;
+    },
+    cleanChords: function(chords) {
+      // Remove all commas and use a set to de-duplicate the chords
+      const removeComma = chords.replace(/,/g, '');
+      const dedupeChords = new Set(removeComma.split(' '));
+
+      // Have to convert it back to an array for the database
+      const cleanChords = Array.from(dedupeChords);
+
+      return cleanChords;
     }
   }
   // Get the current song from vuex at any time
