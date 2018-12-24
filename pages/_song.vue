@@ -50,7 +50,7 @@ export default {
     return {
       isEditing: false,
       isLoading: false,
-      isSaved: false,
+      isUpdated: false,
       isError: false
     };
   },
@@ -77,12 +77,46 @@ export default {
     }
   },
   methods: {
-    updateSong: function() {
-      console.log(this.song);
+    updateSong: async function() {
+      this.isLoading = true;
+      const { chords, description, title, uploadUrls, id } = this.song;
+
+      // Remove all commas and use a set to de-duplicate the chords
+      const removeComma = chords.replace(/,/g, '');
+      const dedupeChords = new Set(removeComma.split(' '));
+
+      // Have to convert it back to an array for the database
+      const cleanChords = Array.from(dedupeChords);
+
+      const updateUrl = `http://localhost:8080/bands/1/songs/${id}/update`;
+      const {
+        data: { songUpdated }
+      } = await axios({
+        method: 'patch',
+        url: updateUrl,
+        data: {
+          title,
+          chords: cleanChords,
+          description,
+          uploadUrls
+        }
+      });
+
+      this.isLoading = false;
+      this.isEditing = false;
+
+      // If the song was updated change the state
+      if (songUpdated[0] === 1) {
+        this.isUpdated = true;
+        return;
+      }
+
+      // Throw an error if the state couldn't be updated
+      this.isError = true;
     },
     cancelChanges: async function() {
       // Grab the song again
-      const songId = this.$route.params.song;
+      const songId = this.song.id;
       const currSong = `http://localhost:8080/bands/1/songs/${songId}`;
 
       const {
