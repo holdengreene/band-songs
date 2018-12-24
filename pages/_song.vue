@@ -1,7 +1,7 @@
 <template>
   <div class="song-wrap" v-if="song" :class="isEditing ? 'editing' : ''">
     <div class="song-banner">Test</div>
-    <button class="song-edit" @click="isEditing = true">Edit Song</button>
+    <button class="song-edit" @click="editSong()">Edit Song</button>
     <form class="update-form" method="post" @submit.prevent="updateSong">
       <!-- Remove readonly if currently editing -->
       <input
@@ -23,7 +23,12 @@
         :readonly="isEditing ? false : true"
       >
       <div class="url-holder" v-for="(url, index) of song.uploadUrls" :key="index">
-        <input class="song-url" type="text" v-model="url.value">
+        <input
+          class="song-url"
+          type="text"
+          v-model="url.value"
+          :readonly="isEditing ? false : true"
+        >
         <button type="button" class="remove-url" @click="removeUrl(index)">X</button>
       </div>
 
@@ -46,7 +51,8 @@ export default {
       isEditing: false,
       isLoading: false,
       isUpdated: false,
-      isError: false
+      isError: false,
+      initialSong: {}
     };
   },
   // Add current song to data on page load
@@ -128,19 +134,15 @@ export default {
     removeUrl: function(index) {
       this.song.uploadUrls.splice(index, 1);
     },
-    cancelChanges: async function() {
-      // Grab the song again
-      const songId = this.song.id;
-      const currSong = `http://localhost:8080/bands/1/songs/${songId}`;
+    editSong: function() {
+      this.isEditing = true;
 
-      const {
-        data: { song }
-      } = await axios.get(currSong);
-
-      song.chords = song.chords.join(' ');
-
-      // Reset the song with the initial song
-      this.song = { ...song };
+      // Save the unchanged song to initialSong
+      this.initialSong = JSON.parse(JSON.stringify(this.song));
+    },
+    cancelChanges: function() {
+      // Grab the song again from data
+      this.song = { ...this.initialSong };
 
       this.isEditing = false;
     },
