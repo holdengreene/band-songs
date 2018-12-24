@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="text" @change="updateUrl()" v-model="uploadUrl.url">
+    <input class="song-url" type="text" @change="updateUrl()" v-model="uploadUrl.url" :readonly="uploadUrl.isEditing ? false : true">
   </div>
 </template>
 
@@ -21,4 +21,10 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.song-url {
+  margin: rem(10px) 0;
+}
+</style>
 
