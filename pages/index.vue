@@ -5,10 +5,10 @@
       <h2>Track The Songs</h2>
       <p>Stop forgetting what songs you know.</p>
     </div>
-    <div class="song-section" v-if="getSongs">
+    <div class="song-section" v-if="songsList">
       <h2>All The Songs</h2>
       <ul class="song-list">
-        <SongItem v-for="song in getSongs" :key="song.id" :song="song"/>
+        <SongItem v-for="song in songsList" :key="song.id" :song="song"/>
       </ul>
     </div>
   </div>
@@ -16,14 +16,27 @@
 
 <script>
 import SongItem from '~/components/SongItem.vue';
+import axios from 'axios';
 
 export default {
   components: {
     SongItem
   },
-  computed: {
-    getSongs: function() {
-      return this.$store.state.songsList.songs;
+  async asyncData() {
+    const allSongs = `http://localhost:8080/bands/1/songs`;
+
+    try {
+      const {
+        data: { songs }
+      } = await axios.get(allSongs);
+
+      if (!songs.length > 0) {
+        return { songsEmpty: true };
+      }
+
+      return { songsList: songs };
+    } catch (e) {
+      return { songsEmpty: true };
     }
   }
 };
