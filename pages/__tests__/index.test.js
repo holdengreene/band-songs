@@ -17,29 +17,26 @@ describe('Index page', () => {
         id: 2
       },
       {
-        title: 'test song 3',
+        title: 'the test song 3',
         chords: 'B A Bm',
         id: 3
       }
     ]
   });
 
-  console.log(wrapper.vm.getSongs.length);
-
   test('is a Vue instance', () => {
     expect(wrapper.isVueInstance()).toBeTruthy();
   });
 
   test('is showing all songs on load', () => {
-    expect(wrapper.vm.getSongs.length === 3).toBeTruthy();
+    expect(wrapper.findAll('songitem-stub').length).toEqual(3);
   });
 
-  test('shows only the search for song', () => {
+  test('shows only the songs based on search', () => {
     wrapper.setData({
-      search: '3'
+      search: 'The'
     });
 
-    console.log(wrapper.html());
-    expect(wrapper.vm.getSongs.length === 1).toBeTruthy();
+    expect(wrapper.findAll('songitem-stub').length).toEqual(1);
   });
 });

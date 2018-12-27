@@ -2,9 +2,12 @@
   <li class="song-item">
     <div class="song-info">
       <h3>{{ song.title }}</h3>
-      <p class="chords">Chords: <span class="chords--span">{{ getChords }}</span></p>
+      <p class="chords">
+        Chords:
+        <span class="chords--span">{{ getChords }}</span>
+      </p>
     </div>
-    <div class="song-buttons">
+    <div class="song-buttons" v-if="song.id">
       <nuxt-link :to="song.id.toString()">View Song</nuxt-link>
     </div>
   </li>
@@ -22,8 +25,12 @@ export default {
   },
   computed: {
     getChords: function() {
+      if (!this.song.chords) {
+        return;
+      }
+
       // Convert the chords from an array to a string
-      return this.song.chords.join(" ");
+      return this.song.chords.join(' ');
     }
   }
 };

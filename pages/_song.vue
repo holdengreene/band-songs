@@ -49,6 +49,9 @@ import { apiUrl } from '~/assets/js/siteDefinitions';
 export default {
   data() {
     return {
+      song: {},
+      isCreated: false,
+      noSong: false,
       isEditing: false,
       isLoading: false,
       isUpdated: false,
