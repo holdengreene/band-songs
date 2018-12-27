@@ -1,5 +1,5 @@
 <template>
-  <div class="create-wrap">
+  <div class="create-wrap" :class="setClasses">
     <form class="create-song" method="post" @submit.prevent="createSong">
       <label for="title">Song Title</label>
       <input class="song-title" name="title" type="text" v-model="song.title">
@@ -18,7 +18,7 @@
       </div>
 
       <button type="button" class="add-url" @click="addUrl()">Add Url</button>
-      <button class="submit-button">Create Song</button>
+      <button type="submit" class="submit-button">Create Song</button>
     </form>
   </div>
 </template>
@@ -35,13 +35,28 @@ export default {
         chords: '',
         description: '',
         uploadUrls: []
-      }
+      },
+      isLoading: false,
+      isCreated: false
     };
+  },
+  computed: {
+    setClasses: function() {
+      if (this.isLoading) {
+        return 'loading';
+      } else if (this.isCreated) {
+        return 'created';
+      }
+
+      return '';
+    }
   },
   methods: {
     createSong: async function() {
       const { title, chords, description, uploadUrls } = this.song;
       let cleanUrls = [];
+
+      this.isLoading = true;
 
       // Format uploadUrls
       if (uploadUrls.length > 0) {
@@ -66,6 +81,9 @@ export default {
           uploadUrls: cleanUrls
         }
       });
+
+      this.isLoading = false;
+      this.isCreated = true;
 
       const newSongId = songCreated.id;
       this.$router.push({ path: `/${newSongId}?created=true` });
