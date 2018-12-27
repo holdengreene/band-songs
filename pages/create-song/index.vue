@@ -71,15 +71,11 @@ export default {
       const createUrl = `${apiUrl}/bands/1/songs/create`;
       const {
         data: { songCreated }
-      } = await axios({
-        method: 'post',
-        url: createUrl,
-        data: {
-          title,
-          chords: cleanChords,
-          description,
-          uploadUrls: cleanUrls
-        }
+      } = await axios.post(createUrl, {
+        title,
+        chords: cleanChords,
+        description,
+        uploadUrls: cleanUrls
       });
 
       this.isLoading = false;

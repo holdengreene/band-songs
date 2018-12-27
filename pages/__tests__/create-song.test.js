@@ -1,8 +1,14 @@
 import { shallowMount } from '@vue/test-utils';
 import CreateSong from '~/pages/create-song/index';
+import mockAxios from 'jest-mock-axios';
 
 describe('Create song page', () => {
   const wrapper = shallowMount(CreateSong);
+
+  afterEach(() => {
+    // cleaning up the mess left behind the previous test
+    mockAxios.reset();
+  });
 
   wrapper.setData({
     song: {
@@ -42,7 +48,26 @@ describe('Create song page', () => {
   test('the form should be submitted', () => {
     wrapper.find('.create-song').trigger('submit.prevent');
     expect(wrapper.find('.loading')).toBeTruthy();
+
+    const expectedSong = {
+      title: 'A new song',
+      chords: ['Am', 'Em', 'G'],
+      description: 'The cool song',
+      uploadUrls: ['', '', '', '']
+    };
+
+    expect(mockAxios.post).toHaveBeenCalledWith(
+      'http://localhost:8080/bands/1/songs/create',
+      expectedSong
+    );
+
+    mockAxios.mockResponse({
+      songCreated: {
+        created: true,
+        id: 1
+      }
+    });
+
+    expect(wrapper.find('.created')).toBeTruthy();
   });
-
-
 });
