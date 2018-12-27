@@ -25,6 +25,7 @@
 
 <script>
 import axios from 'axios';
+import { apiUrl } from '~/assets/js/siteDefinitions';
 
 export default {
   data() {
@@ -52,7 +53,7 @@ export default {
       // Clean them chords
       const cleanChords = this.cleanChords(chords);
 
-      const createUrl = `http://localhost:8080/bands/1/songs/create`;
+      const createUrl = `${apiUrl}/bands/1/songs/create`;
       const {
         data: { songCreated }
       } = await axios({

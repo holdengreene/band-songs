@@ -44,6 +44,7 @@
 
 <script>
 import axios from 'axios';
+import { apiUrl } from '~/assets/js/siteDefinitions';
 
 export default {
   data() {
@@ -65,7 +66,7 @@ export default {
       isCreated = true;
     }
 
-    const currSong = `http://localhost:8080/bands/1/songs/${songId}`;
+    const currSong = `${apiUrl}/bands/1/songs/${songId}`;
 
     try {
       const {
@@ -99,7 +100,7 @@ export default {
 
       const cleanChords = this.cleanChords(chords);
 
-      const updateUrl = `http://localhost:8080/bands/1/songs/${id}/update`;
+      const updateUrl = `${apiUrl}/bands/1/songs/${id}/update`;
 
       let cleanUrls = [];
 

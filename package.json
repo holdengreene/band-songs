@@ -5,6 +5,7 @@
   "author": "Holden Greene",
   "private": true,
   "scripts": {
+    "now-build": "nuxt build --spa --modern=client",
     "dev": "nuxt",
     "build": "nuxt build --modern=client",
     "start": "nuxt start --modern=client",
@@ -23,7 +24,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.11.0",
+    "eslint": "^5.11.1",
     "eslint-config-prettier": "^3.3.0",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-prettier": "3.0.0",

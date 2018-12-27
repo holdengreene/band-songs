@@ -15,6 +15,7 @@
 
 <script>
 import SongItem from '~/components/SongItem.vue';
+import { apiUrl } from '~/assets/js/siteDefinitions';
 import axios from 'axios';
 
 export default {
@@ -27,7 +28,7 @@ export default {
     };
   },
   async asyncData() {
-    const allSongs = `http://localhost:8080/bands/1/songs`;
+    const allSongs = `${apiUrl}/bands/1/songs`;
 
     try {
       const {
