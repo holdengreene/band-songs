@@ -62,9 +62,10 @@ describe('Create song page', () => {
     );
 
     mockAxios.mockResponse({
-      songCreated: {
-        created: true,
-        id: 1
+      data: {
+        songCreated: {
+          id: 1
+        }
       }
     });
 

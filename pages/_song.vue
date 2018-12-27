@@ -100,7 +100,6 @@ export default {
     updateSong: async function() {
       this.isLoading = true;
       const { chords, description, title, uploadUrls, id } = this.song;
-
       const cleanChords = this.cleanChords(chords);
 
       const updateUrl = `${apiUrl}/bands/1/songs/${id}/update`;
@@ -110,21 +109,22 @@ export default {
       // Format uploadUrls
       if (uploadUrls.length > 0) {
         for (const url of uploadUrls) {
+          // Remove empty urls
+          if (url.value === '') {
+            continue;
+          }
+
           cleanUrls.push(url.value);
         }
       }
 
       const {
         data: { songUpdated }
-      } = await axios({
-        method: 'patch',
-        url: updateUrl,
-        data: {
-          title,
-          chords: cleanChords,
-          description,
-          uploadUrls: cleanUrls
-        }
+      } = await axios.post(updateUrl, {
+        title,
+        chords: cleanChords,
+        description,
+        uploadUrls: cleanUrls
       });
 
       this.isLoading = false;
