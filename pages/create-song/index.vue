@@ -19,8 +19,8 @@
             <button type="button" class="remove-url" @click="removeUrl(index)">X</button>
           </div>
 
-          <button type="button" class="add-url" @click="addUrl()">Add Url</button>
-          <button type="submit" class="submit-button">Create Song</button>
+          <button type="button" class="add-url btn btn--light" @click="addUrl()">Add Url</button>
+          <button class="submit-button btn btn--primary">Create Song</button>
         </form>
       </div>
     </ContentHolder>
@@ -29,7 +29,7 @@
 
 <script>
 import axios from 'axios';
-import ContentHolder from '~/components/ContentHolder.vue'
+import ContentHolder from '~/components/ContentHolder.vue';
 import { apiUrl } from '~/assets/js/siteDefinitions';
 
 export default {
@@ -132,6 +132,41 @@ export default {
 
 .submit-button {
   margin-top: rem(50px);
+  width: 100%;
+  align-self: center;
+}
+
+.add-url {
+  width: 30%;
+  font-size: rem(16px);
+}
+
+.remove-url {
+  background-color: var(--background);
+  border: rem(1px) solid $border-light;
+  border-left: none;
+  padding: rem(2px) rem(10px);
+  cursor: pointer;
+}
+
+.url-holder {
+  display: flex;
+  align-items: flex-start;
+}
+
+.song-url {
+  width: 40%;
+  margin-bottom: rem(15px);
+}
+
+@media screen and (min-width: $main-break) {
+  .submit-buttom {
+    width: 50%;
+  }
+
+  .add-url {
+    width: 10%;
+  }
 }
 </style>
 

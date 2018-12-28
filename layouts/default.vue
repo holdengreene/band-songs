@@ -25,9 +25,9 @@ export default {
   --main-color: #2196f3;
   --main-light: #6ec6ff;
   --main-dark: #0069c0;
-  --secondary: #ff5722;
-  --secondary-light: #ff8a59;
-  --secondary-dark: #c41c00;
+  --secondary: #fff176;
+  --secondary-light: #ffffa8;
+  --secondary-dark: #cabf45;
   --background: #f5f5f6;
 }
 .default {
@@ -53,6 +53,58 @@ nav {
 
 footer {
   grid-area: footer;
+}
+
+.btn {
+  // display: inline-block;
+  position: relative;
+  border: none;
+  font-size: rem(20px);
+  padding: rem(5px);
+  border-radius: rem(3px);
+  box-shadow: $box-shadow;
+  transition: background-color 0.3s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    box-shadow: $box-shadow-hover;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::after,
+  &:focus::after {
+    outline: 0;
+    opacity: 1;
+  }
+}
+
+.btn--primary {
+  background-color: var(--secondary);
+
+  &:hover,
+  &:focus {
+    outline: 0;
+    cursor: pointer;
+    background-color: var(--secondary-light);
+  }
+}
+
+.btn--light {
+  background-color: var(--background);
+
+  &:hover,
+  &:focus {
+    outline: 0;
+    cursor: pointer;
+    background-color: #e3e3e3;
+  }
 }
 
 @media screen and (min-width: $main-break) {

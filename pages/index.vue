@@ -68,8 +68,7 @@ export default {
   margin: rem(10px) rem(25px);
   border-radius: rem(3px);
   border: 0 transparent solid;
-  box-shadow: 0 rem(1px) rem(3px) rgba(0, 0, 0, 0.12),
-    0 rem(1px) rem(2px) rgba(0, 0, 0, 0.24);
+  box-shadow: $box-shadow;
 }
 
 .song-list {
