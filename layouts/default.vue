@@ -1,18 +1,21 @@
 <template>
-  <div>
+  <div class="default">
     <MenuBar/>
     <div class="container">
       <nuxt/>
     </div>
+    <FooterSection/>
   </div>
 </template>
 
 <script>
 import MenuBar from '~/components/MenuBar.vue';
+import FooterSection from '~/components/FooterSection.vue';
 
 export default {
   components: {
-    MenuBar
+    MenuBar,
+    FooterSection
   }
 };
 </script>
@@ -25,5 +28,10 @@ export default {
   --secondary: #ff5722;
   --secondary-light: #ff8a59;
   --secondary-dark: #c41c00;
+  --background: #f5f5f6;
+}
+
+.default {
+  background-color: var(--background);
 }
 </style>

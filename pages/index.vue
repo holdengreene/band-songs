@@ -2,24 +2,26 @@
   <div>
     <div class="top-section">
       <h1>All Songs</h1>
-      <input class="song-search" type="text" placeholder="Search Song Titles" v-model="search">
     </div>
-    <div class="song-section" v-if="getSongs">
+    <ContentHolder class="song-section" v-if="getSongs">
+      <input class="song-search" type="text" placeholder="Search Song Titles" v-model="search">
       <ul class="song-list">
         <SongItem v-for="song in getSongs" :key="song.id" :song="song"/>
       </ul>
-    </div>
+    </ContentHolder>
   </div>
 </template>
 
 <script>
 import SongItem from '~/components/SongItem.vue';
+import ContentHolder from '~/components/ContentHolder.vue';
 import { apiUrl } from '~/assets/js/siteDefinitions';
 import axios from 'axios';
 
 export default {
   components: {
-    SongItem
+    SongItem,
+    ContentHolder
   },
   data() {
     return {
@@ -60,24 +62,16 @@ export default {
 
 <style lang="scss" scoped>
 .top-section {
-  display: flex;
-  justify-content: space-between;
   margin: rem(50px) 0;
 }
 
 .song-search {
-  width: 40%;
+  align-self: flex-start;
+  width: 80%;
   padding: rem(10px);
+  margin: rem(10px) rem(25px);
   border-radius: rem(3px);
   border: 0 transparent solid;
-  box-shadow: 0 rem(1px) rem(3px) rgba(0, 0, 0, 0.12),
-    0 rem(1px) rem(2px) rgba(0, 0, 0, 0.24);
-}
-
-.song-section {
-  background-color: #fff;
-  padding: rem(10px);
-  border-radius: rem(3px);
   box-shadow: 0 rem(1px) rem(3px) rgba(0, 0, 0, 0.12),
     0 rem(1px) rem(2px) rgba(0, 0, 0, 0.24);
 }
@@ -85,6 +79,13 @@ export default {
 .song-list {
   list-style: none;
   padding: 0 rem(25px);
+}
+
+@media screen and (min-width: $main-break) {
+  .song-search {
+    align-self: flex-end;
+    width: 40%;
+  }
 }
 </style>
 
