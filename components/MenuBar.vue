@@ -1,9 +1,7 @@
 <template>
   <nav class="menu">
-    <div class="container">
-      <div class="menu__title">
-        <nuxt-link to="/">PPK</nuxt-link>
-      </div>
+    <div class="menu__title">
+      <nuxt-link to="/">PPK</nuxt-link>
     </div>
   </nav>
 </template>
@@ -32,5 +30,4 @@
     padding: rem(15px) rem(50px);
   }
 }
-
 </style>

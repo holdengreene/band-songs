@@ -1,52 +1,58 @@
 <template>
-  <div class="song-wrap" v-if="song" :class="isEditing ? 'editing' : ''">
-    <div class="song-banner">Test</div>
+  <ContentHolder>
     <button class="song-edit" @click="editSong()">Edit Song</button>
-    <form class="update-form" method="post" @submit.prevent="updateSong">
-      <!-- Remove readonly if currently editing -->
-      <input
-        class="song-title"
-        type="text"
-        v-model="song.title"
-        :readonly="isEditing ? false : true"
-      >
-      <input
-        class="song-chords"
-        type="text"
-        v-model="song.chords"
-        :readonly="isEditing ? false : true"
-      >
-      <input
-        class="song-description"
-        type="textarea"
-        v-model="song.description"
-        :readonly="isEditing ? false : true"
-      >
-      <div class="url-holder" v-for="(url, index) of song.uploadUrls" :key="index">
+    <div class="song-wrap" v-if="song" :class="isEditing ? 'editing' : ''">
+      <div class="song-banner">Test</div>
+      <form class="update-form" method="post" @submit.prevent="updateSong">
+        <!-- Remove readonly if currently editing -->
         <input
-          class="song-url"
+          class="song-title"
           type="text"
-          v-model="url.value"
+          v-model="song.title"
           :readonly="isEditing ? false : true"
         >
-        <button type="button" class="remove-url" @click="removeUrl(index)">X</button>
-      </div>
+        <input
+          class="song-chords"
+          type="text"
+          v-model="song.chords"
+          :readonly="isEditing ? false : true"
+        >
+        <input
+          class="song-description"
+          type="textarea"
+          v-model="song.description"
+          :readonly="isEditing ? false : true"
+        >
+        <div class="url-holder" v-for="(url, index) of song.uploadUrls" :key="index">
+          <input
+            class="song-url"
+            type="text"
+            v-model="url.value"
+            :readonly="isEditing ? false : true"
+          >
+          <button type="button" class="remove-url" @click="removeUrl(index)">X</button>
+        </div>
 
-      <button type="button" class="add-url" @click="addUrl()">Add Url</button>
+        <button type="button" class="add-url" @click="addUrl()">Add Url</button>
 
-      <div class="form-buttons">
-        <button class="submit-song">Update Song</button>
-        <button type="button" class="cancel-song" @click="cancelChanges()">Cancel Changes</button>
-      </div>
-    </form>
-  </div>
+        <div class="form-buttons">
+          <button class="submit-song">Update Song</button>
+          <button type="button" class="cancel-song" @click="cancelChanges()">Cancel Changes</button>
+        </div>
+      </form>
+    </div>
+  </ContentHolder>
 </template>
 
 <script>
 import axios from 'axios';
+import ContentHolder from '~/components/ContentHolder.vue';
 import { apiUrl } from '~/assets/js/siteDefinitions';
 
 export default {
+  components: {
+    ContentHolder
+  },
   data() {
     return {
       song: {},
@@ -173,17 +179,12 @@ export default {
 
 <style lang="scss" scoped>
 .song-wrap {
-  position: relative;
-  margin-top: rem(50px);
-  background-color: $off-white;
-  padding: rem(50px);
-  border: rem(1px) solid $border-dark;
+  padding: rem(15px);
 }
 
 .song-edit {
-  position: absolute;
-  right: rem(20px);
-  top: rem(10px);
+  align-self: flex-start;
+  margin: rem(10px) 0;
 }
 
 .update-form {
@@ -202,7 +203,6 @@ export default {
 }
 
 // Add all the styles for the editing view
-
 .editing {
   .song-edit {
     display: none;
@@ -212,6 +212,16 @@ export default {
   .add-url,
   .remove-url {
     display: block;
+  }
+}
+
+@media screen and (min-width: $main-break) {
+  .song-wrap {
+    padding: rem(50px);
+  }
+
+  .song-edit {
+    align-self: flex-end;
   }
 }
 </style>

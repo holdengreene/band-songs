@@ -38,6 +38,7 @@ export default {
     '. content . '
     'footer footer footer';
   grid-template-columns: rem(15px) 1fr rem(15px);
+  gap: rem(25px) 0;
 }
 
 nav {
@@ -45,6 +46,8 @@ nav {
 }
 
 .container {
+  // Push the footer down
+  min-height: 85vh;
   grid-area: content;
 }
 

@@ -61,10 +61,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.top-section {
-  margin: rem(50px) 0;
-}
-
 .song-search {
   align-self: flex-start;
   width: 80%;

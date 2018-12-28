@@ -11,7 +11,8 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { hid: 'description', name: 'description', content: pkg.description },
+      { hid: 'theme', name: 'theme-color', content: '#0069c0' }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
@@ -19,7 +20,7 @@ module.exports = {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#ff4560' },
+  loading: { color: '#6ec6ff' },
 
   /*
    ** Global CSS

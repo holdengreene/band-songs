@@ -1,33 +1,41 @@
 <template>
-  <div class="create-wrap" :class="setClasses">
-    <form class="create-song" method="post" @submit.prevent="createSong">
-      <label for="title">Song Title</label>
-      <input class="song-title" name="title" type="text" v-model="song.title">
-      <label for="chords">Song Chords</label>
-      <p>Please enter the chords with spaces in between. Each chord should only be entered once.</p>
-      <input class="song-chords" name="chords" type="text" v-model="song.chords">
-      <label for="description">Song Description</label>
-      <input class="song-description" type="textarea" v-model="song.description">
-      <label for="urls">
-        Song Urls
-        <span class="optional">- Optional</span>
-      </label>
-      <div class="url-holder" v-for="(url, index) of song.uploadUrls" :key="index">
-        <input class="song-url" type="text" v-model="url.value">
-        <button type="button" class="remove-url" @click="removeUrl(index)">X</button>
-      </div>
+  <div>
+    <ContentHolder>
+      <div class="create-wrap" :class="setClasses">
+        <form class="create-song" method="post" @submit.prevent="createSong">
+          <label for="title">Song Title</label>
+          <input class="song-title" name="title" type="text" v-model="song.title">
+          <label for="chords">Song Chords</label>
+          <p>Please enter the chords with spaces in between. Each chord should only be entered once.</p>
+          <input class="song-chords" name="chords" type="text" v-model="song.chords">
+          <label for="description">Song Description</label>
+          <input class="song-description" type="textarea" v-model="song.description">
+          <label for="urls">
+            Song Urls
+            <span class="optional">- Optional</span>
+          </label>
+          <div class="url-holder" v-for="(url, index) of song.uploadUrls" :key="index">
+            <input class="song-url" type="text" v-model="url.value">
+            <button type="button" class="remove-url" @click="removeUrl(index)">X</button>
+          </div>
 
-      <button type="button" class="add-url" @click="addUrl()">Add Url</button>
-      <button type="submit" class="submit-button">Create Song</button>
-    </form>
+          <button type="button" class="add-url" @click="addUrl()">Add Url</button>
+          <button type="submit" class="submit-button">Create Song</button>
+        </form>
+      </div>
+    </ContentHolder>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import ContentHolder from '~/components/ContentHolder.vue'
 import { apiUrl } from '~/assets/js/siteDefinitions';
 
 export default {
+  components: {
+    ContentHolder
+  },
   data() {
     return {
       song: {
@@ -106,10 +114,7 @@ export default {
 
 <style lang="scss" scoped>
 .create-wrap {
-  margin-top: rem(50px);
-  background-color: $off-white;
   padding: rem(50px);
-  border: rem(1px) solid $border-dark;
 }
 
 .create-song {
