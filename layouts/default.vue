@@ -30,8 +30,31 @@ export default {
   --secondary-dark: #c41c00;
   --background: #f5f5f6;
 }
-
 .default {
   background-color: var(--background);
+  display: grid;
+  grid-template-areas:
+    'nav nav nav'
+    '. content . '
+    'footer footer footer';
+  grid-template-columns: rem(15px) 1fr rem(15px);
+}
+
+nav {
+  grid-area: nav;
+}
+
+.container {
+  grid-area: content;
+}
+
+footer {
+  grid-area: footer;
+}
+
+@media screen and (min-width: $main-break) {
+  .default {
+    grid-template-columns: 1fr 3fr 1fr;
+  }
 }
 </style>

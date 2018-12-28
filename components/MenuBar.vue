@@ -11,9 +11,9 @@
 <style lang="scss" scoped>
 .menu {
   background-color: var(--main-color);
-  padding: rem(15px) 0;
+  padding: rem(15px);
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -26,4 +26,11 @@
     text-decoration: none;
   }
 }
+
+@media screen and (min-width: $main-break) {
+  .menu {
+    padding: rem(15px) rem(50px);
+  }
+}
+
 </style>
