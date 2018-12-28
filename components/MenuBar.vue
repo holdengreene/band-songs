@@ -10,7 +10,7 @@
 
 <style lang="scss" scoped>
 .menu {
-  background-color: $main-splash-color;
+  background-color: var(--main-color);
   padding: rem(15px) 0;
   display: flex;
   justify-content: center;
@@ -21,7 +21,7 @@
   font-size: rem(24px);
 
   a {
-    color: $dark-heading;
+    color: #000;
     cursor: pointer;
     text-decoration: none;
   }

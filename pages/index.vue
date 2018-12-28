@@ -1,11 +1,10 @@
 <template>
   <div>
-    <div class="useful-text">
+    <div class="top-section">
       <h1>All Songs</h1>
-      <input type="text" placeholder="Search" v-model="search">
+      <input class="song-search" type="text" placeholder="Search Song Titles" v-model="search">
     </div>
     <div class="song-section" v-if="getSongs">
-      <h2>All The Songs</h2>
       <ul class="song-list">
         <SongItem v-for="song in getSongs" :key="song.id" :song="song"/>
       </ul>
@@ -60,10 +59,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.song-section {
-  background-color: $off-white;
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  margin: rem(50px) 0;
+}
+
+.song-search {
+  width: 40%;
   padding: rem(10px);
-  border: rem(1px) solid $border-dark;
+  border-radius: rem(3px);
+  border: 0 transparent solid;
+  box-shadow: 0 rem(1px) rem(3px) rgba(0, 0, 0, 0.12),
+    0 rem(1px) rem(2px) rgba(0, 0, 0, 0.24);
+}
+
+.song-section {
+  background-color: #fff;
+  padding: rem(10px);
+  border-radius: rem(3px);
+  box-shadow: 0 rem(1px) rem(3px) rgba(0, 0, 0, 0.12),
+    0 rem(1px) rem(2px) rgba(0, 0, 0, 0.24);
 }
 
 .song-list {

@@ -21,6 +21,7 @@
     "node-sass": "^4.11.0",
     "nuxt": "^2.3.4",
     "nuxt-sass-resources-loader": "^2.0.5",
+    "postcss-custom-properties": "^8.0.9",
     "sass-loader": "^7.1.0"
   },
   "devDependencies": {

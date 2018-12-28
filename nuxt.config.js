@@ -46,6 +46,9 @@ module.exports = {
     // See https://github.com/nuxt-community/axios-module#options
   },
 
+  // Ignore all the tests
+  ignore: ['**/*.test.*', '**/*.spec.*', '**/__mocks__/*.*'],
+
   /*
    ** Build configuration
    */
