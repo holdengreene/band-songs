@@ -29,6 +29,7 @@ export default {
   --secondary-light: #ffffa8;
   --secondary-dark: #cabf45;
   --background: #f5f5f6;
+  --warning: #ff5252;
 }
 .default {
   background-color: var(--background);
@@ -114,6 +115,19 @@ footer {
   }
 }
 
+.btn--warning {
+  background-color: var(--warning);
+  color: #fff;
+
+  &:hover,
+  &:focus {
+    color: #fff;
+    outline: 0;
+    cursor: pointer;
+    background-color: #ff7474;
+  }
+}
+
 // Form styles
 label {
   font-size: rem(24px);
@@ -131,6 +145,7 @@ textarea {
   border-radius: rem(3px);
   padding: rem(5px) rem(10px);
   transition: border-color 0.3s ease;
+  margin-top: rem(10px);
 }
 
 input:focus,
@@ -142,6 +157,8 @@ textarea:focus {
 input:read-only,
 textarea:read-only {
   border: none;
+  background-color: var(--background);
+  width: 100%;
 }
 
 form p {

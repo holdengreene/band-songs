@@ -1,30 +1,56 @@
 <template>
   <div>
     <ContentHolder :class="isEditing ? 'editing' : ''">
-      <button class="song-edit" @click="editSong()">Edit Song</button>
-      <button class="song-delete" @click="showModal = true">Delete Song</button>
+      <button class="song-edit btn btn--primary" @click="editSong()">Edit Song</button>
+      <button class="song-delete btn btn--warning" @click="showModal = true">Delete Song</button>
       <div class="song-wrap" v-if="song">
-        <div class="song-banner">Test</div>
+        <!-- <div class="song-banner">Test</div> -->
         <form class="update-form" method="post" @submit.prevent="updateSong">
           <!-- Remove readonly if currently editing -->
+          <label for="title">Song Title</label>
           <input
             class="song-title"
+            name="title"
             type="text"
             v-model="song.title"
             :readonly="isEditing ? false : true"
           >
+          
+          <label for="chords">Song Chords</label>
+          <p
+            v-if="isEditing"
+          >A list of all the chords in the song. Separate each chord with a space in between.</p>
+
           <input
             class="song-chords"
             type="text"
+            name="chords"
             v-model="song.chords"
             :readonly="isEditing ? false : true"
           >
-          <input
+          
+          <label for="description">
+            Song Description
+            <span class="optional">- Optional</span>
+          </label>
+          <p
+            v-if="isEditing"
+          >Enter a description for the song. The could also include song structure.</p>
+          <textarea
             class="song-description"
-            type="textarea"
             v-model="song.description"
+            name="description"
+            rows="4"
             :readonly="isEditing ? false : true"
-          >
+          />
+          
+          <label for="urls">
+            Song URLs
+            <span class="optional">- Optional</span>
+          </label>
+          <p
+            v-if="isEditing"
+          >Add multiple URLs for the song. These can point to recordings, videos, or cat pictures. Really anything to do with the song.</p>
           <div class="url-holder" v-for="(url, index) of song.uploadUrls" :key="index">
             <input
               class="song-url"
@@ -38,8 +64,12 @@
           <button type="button" class="add-url" @click="addUrl()">Add Url</button>
 
           <div class="form-buttons">
-            <button class="submit-song">Update Song</button>
-            <button type="button" class="cancel-song" @click="cancelChanges()">Cancel Changes</button>
+            <button class="submit-song btn btn--primary">Update Song</button>
+            <button
+              type="button"
+              class="cancel-song btn btn--light"
+              @click="cancelChanges()"
+            >Cancel Changes</button>
           </div>
         </form>
       </div>
@@ -49,7 +79,7 @@
       <div class="song-modal">
         <h2>Are you sure you want to delete this song?</h2>
         <p>This action is un-undoable.</p>
-        <button class="song-modal__delete btn btn--primary" @click="deleteSong()">Delete Song</button>
+        <button class="song-modal__delete btn btn--warning" @click="deleteSong()">Delete Song</button>
         <button class="song-modal__cancel btn btn--light" @click="showModal = false">Cancel</button>
       </div>
     </div>
@@ -242,11 +272,20 @@ export default {
     display: none;
   }
 
-  .form-buttons,
   .add-url,
   .remove-url,
   .song-delete {
     display: block;
+  }
+
+  .form-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: rem(25px);
+
+    .btn {
+      margin: 0 rem(10px);
+    }
   }
 }
 

@@ -6,20 +6,23 @@
         <form class="create-song" method="post" @submit.prevent="createSong">
           <label for="title">Song Title</label>
           <input class="song-title" name="title" type="text" v-model="song.title" required>
+          
           <label for="chords">Song Chords</label>
-          <p>A list of all the chords in the song. Seperate each chord with a space in between.</p>
+          <p>A list of all the chords in the song. Separate each chord with a space in between.</p>
           <input class="song-chords" name="chords" type="text" v-model="song.chords" required>
+          
           <label for="description">
             Song Description
             <span class="optional">- Optional</span>
           </label>
           <p>Enter a description for the song. The could also include song structure.</p>
           <textarea class="song-description" rows="4" v-model="song.description"/>
+          
           <label for="urls">
             Song URLs
             <span class="optional">- Optional</span>
           </label>
-          <p>Add multiple URLs for the song. These can point to recordings, videos, or cat pictures. Really anythign to do with the song.</p>
+          <p>Add multiple URLs for the song. These can point to recordings, videos, or cat pictures. Really anything to do with the song.</p>
           <div class="url-holder" v-for="(url, index) of song.uploadUrls" :key="index">
             <input class="song-url" type="text" v-model="url.value">
             <button type="button" class="remove-url" @click="removeUrl(index)">X</button>

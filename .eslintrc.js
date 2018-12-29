@@ -18,6 +18,7 @@ module.exports = {
     'vue/attributes-order': 'off',
     'vue/html-closing-bracket-spacing': 'off',
     'vue/singleline-html-element-content-newline': 'off',
-    'vue/component-name-in-template-casing': 'off'
+    'vue/component-name-in-template-casing': 'off',
+    'vue/multiline-html-element-content-newline': 'off'
   }
-}
+};
