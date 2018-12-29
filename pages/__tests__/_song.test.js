@@ -3,7 +3,9 @@ import Song from '~/pages/_song';
 import mockAxios from 'jest-mock-axios';
 
 describe('Song page', () => {
-  const wrapper = shallowMount(Song);
+  const wrapper = shallowMount(Song, {
+    stubs: ['nuxt-link']
+  });
 
   afterEach(() => {
     // cleaning up the mess left behind the previous test

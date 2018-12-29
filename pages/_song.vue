@@ -1,10 +1,12 @@
 <template>
   <div>
-    <ContentHolder :class="isEditing ? 'editing' : ''">
-      <button class="song-edit btn btn--primary" @click="editSong()">Edit Song</button>
-      <button class="song-delete btn btn--warning" @click="showModal = true">Delete Song</button>
-      <div class="song-wrap" v-if="song">
-        <!-- <div class="song-banner">Test</div> -->
+    <ContentHolder :class="infoBox.isEditing ? 'editing' : ''">
+      <div class="action-section">
+        <SongBanner :song-state="infoBox"/>
+        <button class="song-edit btn btn--primary" @click="editSong()">Edit Song</button>
+        <button class="song-delete btn btn--warning" @click="showModal = true">Delete Song</button>
+      </div>
+      <div class="song-wrap" v-if="noSong === false">
         <form class="update-form" method="post" @submit.prevent="updateSong">
           <!-- Remove readonly if currently editing -->
           <label for="title">Song Title</label>
@@ -13,12 +15,12 @@
             name="title"
             type="text"
             v-model="song.title"
-            :readonly="isEditing ? false : true"
+            :readonly="infoBox.isEditing ? false : true"
           >
           
           <label for="chords">Song Chords</label>
           <p
-            v-if="isEditing"
+            v-if="infoBox.isEditing"
           >A list of all the chords in the song. Separate each chord with a space in between.</p>
 
           <input
@@ -26,7 +28,7 @@
             type="text"
             name="chords"
             v-model="song.chords"
-            :readonly="isEditing ? false : true"
+            :readonly="infoBox.isEditing ? false : true"
           >
           
           <label for="description">
@@ -34,14 +36,14 @@
             <span class="optional">- Optional</span>
           </label>
           <p
-            v-if="isEditing"
+            v-if="infoBox.isEditing"
           >Enter a description for the song. The could also include song structure.</p>
           <textarea
             class="song-description"
             v-model="song.description"
             name="description"
             rows="4"
-            :readonly="isEditing ? false : true"
+            :readonly="infoBox.isEditing ? false : true"
           />
           
           <label for="urls">
@@ -49,19 +51,19 @@
             <span class="optional">- Optional</span>
           </label>
           <p
-            v-if="isEditing"
+            v-if="infoBox.isEditing"
           >Add multiple URLs for the song. These can point to recordings, videos, or cat pictures. Really anything to do with the song.</p>
           <div class="url-holder" v-for="(url, index) of song.uploadUrls" :key="index">
             <input
               class="song-url"
               type="text"
               v-model="url.value"
-              :readonly="isEditing ? false : true"
+              :readonly="infoBox.isEditing ? false : true"
             >
             <button type="button" class="remove-url" @click="removeUrl(index)">X</button>
           </div>
 
-          <button type="button" class="add-url" @click="addUrl()">Add Url</button>
+          <button type="button" class="add-url btn btn--light" @click="addUrl()">Add Url</button>
 
           <div class="form-buttons">
             <button class="submit-song btn btn--primary">Update Song</button>
@@ -71,16 +73,25 @@
               @click="cancelChanges()"
             >Cancel Changes</button>
           </div>
+          <div class="loading-section" v-if="isLoading">Loading...</div>
         </form>
       </div>
     </ContentHolder>
 
     <div class="song-modal-section" :class="showModal ? 'active' : ''">
       <div class="song-modal">
-        <h2>Are you sure you want to delete this song?</h2>
-        <p>This action is un-undoable.</p>
-        <button class="song-modal__delete btn btn--warning" @click="deleteSong()">Delete Song</button>
-        <button class="song-modal__cancel btn btn--light" @click="showModal = false">Cancel</button>
+        <div v-if="isDeleted === false">
+          <h2>Are you sure you want to delete this song?</h2>
+          <p>This action is un-undoable.</p>
+
+          <button class="song-modal__delete btn btn--warning" @click="deleteSong()">Delete Song</button>
+          <button class="song-modal__cancel btn btn--light" @click="showModal = false">Cancel</button>
+        </div>
+        <div v-if="isDeleted">
+          <h2>Song Deleted!</h2>
+          <p v-if="isDeleted">{{ song.title }} has been deleted.</p>
+          <nuxt-link to="/" class="btn btn--primary">View All Songs</nuxt-link>
+        </div>
       </div>
     </div>
   </div>
@@ -89,35 +100,32 @@
 <script>
 import axios from 'axios';
 import ContentHolder from '~/components/ContentHolder.vue';
+import SongBanner from '~/components/SongBanner.vue';
 import { apiUrl } from '~/assets/js/siteDefinitions';
 
 export default {
   components: {
-    ContentHolder
+    ContentHolder,
+    SongBanner
   },
   data() {
     return {
       song: {},
-      isCreated: false,
+      initialSong: {},
       noSong: false,
-      isEditing: false,
-      isLoading: false,
-      isUpdated: false,
-      isError: false,
-      isDeleted: false,
       showModal: false,
-      initialSong: {}
+      isDeleted: false,
+      isLoading: false,
+      infoBox: {
+        isEditing: false,
+        isUpdated: false,
+        isError: false
+      }
     };
   },
   // Add current song to data on page load
   async asyncData({ params, query }) {
     const songId = params.song;
-    const created = query.created;
-    let isCreated = false;
-
-    if (created) {
-      isCreated = true;
-    }
 
     const currSong = `${apiUrl}/bands/1/songs/${songId}`;
 
@@ -141,7 +149,7 @@ export default {
         return { noSong: true };
       }
 
-      return { song, isCreated };
+      return { song };
     } catch (e) {
       return { noSong: true };
     }
@@ -178,16 +186,16 @@ export default {
       });
 
       this.isLoading = false;
-      this.isEditing = false;
+      this.infoBox.isEditing = false;
 
       // If the song was updated change the state
       if (songUpdated[0] === 1) {
-        this.isUpdated = true;
+        this.infoBox.isUpdated = true;
         return;
       }
 
       // Throw an error if the state couldn't be updated
-      this.isError = true;
+      this.infoBox.isError = true;
     },
     deleteSong: async function() {
       this.isLoading = true;
@@ -211,7 +219,9 @@ export default {
       this.song.uploadUrls.splice(index, 1);
     },
     editSong: function() {
-      this.isEditing = true;
+      this.infoBox.isEditing = true;
+      this.infoBox.isUpdated = false;
+      this.infoBox.isError = false;
 
       // Save the unchanged song to initialSong
       this.initialSong = JSON.parse(JSON.stringify(this.song));
@@ -220,7 +230,7 @@ export default {
       // Grab the song again from data
       this.song = { ...this.initialSong };
 
-      this.isEditing = false;
+      this.infoBox.isEditing = false;
     },
     cleanChords: function(chords) {
       // Remove all commas and use a set to de-duplicate the chords
@@ -237,6 +247,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.action-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .song-wrap {
   padding: rem(15px);
 }
@@ -264,6 +280,29 @@ export default {
 .add-url,
 .remove-url {
   display: none;
+}
+
+.add-url {
+  width: 30%;
+  font-size: rem(16px);
+}
+
+.url-holder {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: rem(15px);
+}
+
+.remove-url {
+  background-color: var(--background);
+  border: rem(1px) solid $border-light;
+  border-left: none;
+  padding: rem(5px) rem(10px);
+  cursor: pointer;
+}
+
+.song-url {
+  width: 85%;
 }
 
 // Add all the styles for the editing view
@@ -330,6 +369,14 @@ export default {
   .song-edit,
   .song-delete {
     align-self: flex-end;
+  }
+
+  .add-url {
+    width: 10%;
+  }
+
+  .song-url {
+    width: 40%;
   }
 }
 </style>

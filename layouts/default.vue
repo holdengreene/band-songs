@@ -29,6 +29,7 @@ export default {
   --secondary-light: #ffffa8;
   --secondary-dark: #cabf45;
   --background: #f5f5f6;
+  --success: #8bc34a;
   --warning: #ff5252;
 }
 .default {
