@@ -39,6 +39,7 @@ export default {
     'footer footer footer';
   grid-template-columns: rem(15px) 1fr rem(15px);
   gap: rem(25px) 0;
+  position: relative;
 }
 
 nav {
@@ -111,6 +112,40 @@ footer {
     cursor: pointer;
     background-color: #e3e3e3;
   }
+}
+
+// Form styles
+label {
+  font-size: rem(24px);
+  font-weight: 600;
+  margin-top: rem(30px);
+}
+
+.optional {
+  font-size: rem(20px);
+}
+
+input,
+textarea {
+  border: rem(1px) solid $border-dark;
+  border-radius: rem(3px);
+  padding: rem(5px) rem(10px);
+  transition: border-color 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--main-dark);
+}
+
+input:read-only,
+textarea:read-only {
+  border: none;
+}
+
+form p {
+  margin-bottom: rem(10px);
 }
 
 @media screen and (min-width: $main-break) {

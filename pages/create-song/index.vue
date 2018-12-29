@@ -2,27 +2,30 @@
   <div>
     <ContentHolder>
       <div class="create-wrap" :class="setClasses">
+        <h1 style="text-align:center;">Create A Song</h1>
         <form class="create-song" method="post" @submit.prevent="createSong">
           <label for="title">Song Title</label>
           <input class="song-title" name="title" type="text" v-model="song.title" required>
           <label for="chords">Song Chords</label>
-          <p>Please enter the chords with spaces in between. Each chord should only be entered once.</p>
+          <p>A list of all the chords in the song. Seperate each chord with a space in between.</p>
           <input class="song-chords" name="chords" type="text" v-model="song.chords" required>
           <label for="description">
             Song Description
             <span class="optional">- Optional</span>
           </label>
-          <input class="song-description" type="textarea" v-model="song.description">
+          <p>Enter a description for the song. The could also include song structure.</p>
+          <textarea class="song-description" rows="4" v-model="song.description"/>
           <label for="urls">
-            Song Urls
+            Song URLs
             <span class="optional">- Optional</span>
           </label>
+          <p>Add multiple URLs for the song. These can point to recordings, videos, or cat pictures. Really anythign to do with the song.</p>
           <div class="url-holder" v-for="(url, index) of song.uploadUrls" :key="index">
             <input class="song-url" type="text" v-model="url.value">
             <button type="button" class="remove-url" @click="removeUrl(index)">X</button>
           </div>
 
-          <button type="button" class="add-url btn btn--light" @click="addUrl()">Add Url</button>
+          <button type="button" class="add-url btn btn--light" @click="addUrl()">Add URL</button>
           <button class="submit-button btn btn--primary">Create Song</button>
         </form>
       </div>
@@ -123,14 +126,6 @@ export default {
 .create-song {
   display: flex;
   flex-direction: column;
-
-  label {
-    margin-top: rem(30px);
-  }
-
-  p {
-    margin-bottom: 0;
-  }
 }
 
 .submit-button {
@@ -144,31 +139,35 @@ export default {
   font-size: rem(16px);
 }
 
+.url-holder {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: rem(15px);
+}
+
 .remove-url {
   background-color: var(--background);
   border: rem(1px) solid $border-light;
   border-left: none;
-  padding: rem(2px) rem(10px);
+  padding: rem(5px) rem(10px);
   cursor: pointer;
 }
 
-.url-holder {
-  display: flex;
-  align-items: flex-start;
-}
-
 .song-url {
-  width: 40%;
-  margin-bottom: rem(15px);
+  width: 85%;
 }
 
 @media screen and (min-width: $main-break) {
-  .submit-buttom {
+  .submit-button {
     width: 50%;
   }
 
   .add-url {
     width: 10%;
+  }
+
+  .song-url {
+    width: 40%;
   }
 }
 </style>
