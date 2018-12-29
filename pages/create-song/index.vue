@@ -4,11 +4,14 @@
       <div class="create-wrap" :class="setClasses">
         <form class="create-song" method="post" @submit.prevent="createSong">
           <label for="title">Song Title</label>
-          <input class="song-title" name="title" type="text" v-model="song.title">
+          <input class="song-title" name="title" type="text" v-model="song.title" required>
           <label for="chords">Song Chords</label>
           <p>Please enter the chords with spaces in between. Each chord should only be entered once.</p>
-          <input class="song-chords" name="chords" type="text" v-model="song.chords">
-          <label for="description">Song Description</label>
+          <input class="song-chords" name="chords" type="text" v-model="song.chords" required>
+          <label for="description">
+            Song Description
+            <span class="optional">- Optional</span>
+          </label>
           <input class="song-description" type="textarea" v-model="song.description">
           <label for="urls">
             Song Urls

@@ -3,12 +3,12 @@
     <div class="song-info">
       <h3>{{ song.title }}</h3>
       <p class="chords">
-        Chords:
-        <span class="chords--span">{{ getChords }}</span>
+        <span class="chords--span">Chords:</span>
+        {{ getChords }}
       </p>
     </div>
     <div class="song-buttons" v-if="song.id">
-      <nuxt-link :to="song.id.toString()">View Song</nuxt-link>
+      <nuxt-link class="btn btn--primary view-song" :to="song.id.toString()">View Song</nuxt-link>
     </div>
   </li>
 </template>
@@ -39,15 +39,31 @@ export default {
 <style lang="scss" scoped>
 .song-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   border-bottom: rem(1px) solid $border-light;
-  margin: rem(20px) 0;
 }
 
 .chords--span {
-  color: $strange-pink;
-  font-weight: 700;
+  color: var(--main-dark);
+  font-weight: 600;
+}
+
+.song-buttons {
+  margin: rem(20px) 0;
+}
+
+.view-song {
+  font-weight: 400;
+  padding: rem(10px) rem(20px);
+}
+
+@media screen and (min-width: $main-break) {
+  .song-item {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: rem(20px) 0;
+  }
 }
 </style>
 

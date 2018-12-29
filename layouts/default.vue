@@ -56,14 +56,19 @@ footer {
 }
 
 .btn {
-  // display: inline-block;
   position: relative;
   border: none;
   font-size: rem(20px);
+  color: #000;
   padding: rem(5px);
   border-radius: rem(3px);
   box-shadow: $box-shadow;
   transition: background-color 0.3s ease;
+
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
 
   &::after {
     content: '';
@@ -87,6 +92,7 @@ footer {
 
 .btn--primary {
   background-color: var(--secondary);
+  font-weight: 700;
 
   &:hover,
   &:focus {

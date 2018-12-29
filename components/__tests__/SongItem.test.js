@@ -23,6 +23,6 @@ describe('Create song item', () => {
   });
 
   test("the chords should be changed to a string", () => {
-    expect(wrapper.html()).toContain('<span class="chords--span">Am Em7</span>');
+    expect(wrapper.html()).toContain('Am Em7');
   })
 });
