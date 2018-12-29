@@ -82,4 +82,40 @@ describe('Song page', () => {
       }
     });
   });
+
+  test('the delete modal should open', () => {
+    // Click the edit and delete button
+    wrapper.find('.song-edit').trigger('click');
+    wrapper.find('.song-delete').trigger('click');
+
+    expect(wrapper.find('.song-modal-section.active').exists()).toBeTruthy();
+  });
+
+  test('the delete modal should be closed', () => {
+    // Click the edit and delete button
+    wrapper.find('.song-edit').trigger('click');
+    wrapper.find('.song-delete').trigger('click');
+
+    wrapper.find('.song-modal__cancel').trigger('click');
+
+    expect(wrapper.find('.song-modal-section.active').exists()).toBeFalsy();
+  });
+
+  test('the song should be deleted', () => {
+    // Click the edit and delete button
+    wrapper.find('.song-edit').trigger('click');
+    wrapper.find('.song-delete').trigger('click');
+
+    wrapper.find('.song-modal__delete').trigger('click');
+
+    expect(mockAxios.delete).toHaveBeenCalledWith(
+      'http://localhost:8080/bands/1/songs/1/destroy'
+    );
+
+    mockAxios.mockResponse({
+      data: {
+        success: 1
+      }
+    });
+  });
 });

@@ -1,47 +1,59 @@
 <template>
-  <ContentHolder>
-    <button class="song-edit" @click="editSong()">Edit Song</button>
-    <div class="song-wrap" v-if="song" :class="isEditing ? 'editing' : ''">
-      <div class="song-banner">Test</div>
-      <form class="update-form" method="post" @submit.prevent="updateSong">
-        <!-- Remove readonly if currently editing -->
-        <input
-          class="song-title"
-          type="text"
-          v-model="song.title"
-          :readonly="isEditing ? false : true"
-        >
-        <input
-          class="song-chords"
-          type="text"
-          v-model="song.chords"
-          :readonly="isEditing ? false : true"
-        >
-        <input
-          class="song-description"
-          type="textarea"
-          v-model="song.description"
-          :readonly="isEditing ? false : true"
-        >
-        <div class="url-holder" v-for="(url, index) of song.uploadUrls" :key="index">
+  <div>
+    <ContentHolder :class="isEditing ? 'editing' : ''">
+      <button class="song-edit" @click="editSong()">Edit Song</button>
+      <button class="song-delete" @click="showModal = true">Delete Song</button>
+      <div class="song-wrap" v-if="song">
+        <div class="song-banner">Test</div>
+        <form class="update-form" method="post" @submit.prevent="updateSong">
+          <!-- Remove readonly if currently editing -->
           <input
-            class="song-url"
+            class="song-title"
             type="text"
-            v-model="url.value"
+            v-model="song.title"
             :readonly="isEditing ? false : true"
           >
-          <button type="button" class="remove-url" @click="removeUrl(index)">X</button>
-        </div>
+          <input
+            class="song-chords"
+            type="text"
+            v-model="song.chords"
+            :readonly="isEditing ? false : true"
+          >
+          <input
+            class="song-description"
+            type="textarea"
+            v-model="song.description"
+            :readonly="isEditing ? false : true"
+          >
+          <div class="url-holder" v-for="(url, index) of song.uploadUrls" :key="index">
+            <input
+              class="song-url"
+              type="text"
+              v-model="url.value"
+              :readonly="isEditing ? false : true"
+            >
+            <button type="button" class="remove-url" @click="removeUrl(index)">X</button>
+          </div>
 
-        <button type="button" class="add-url" @click="addUrl()">Add Url</button>
+          <button type="button" class="add-url" @click="addUrl()">Add Url</button>
 
-        <div class="form-buttons">
-          <button class="submit-song">Update Song</button>
-          <button type="button" class="cancel-song" @click="cancelChanges()">Cancel Changes</button>
-        </div>
-      </form>
+          <div class="form-buttons">
+            <button class="submit-song">Update Song</button>
+            <button type="button" class="cancel-song" @click="cancelChanges()">Cancel Changes</button>
+          </div>
+        </form>
+      </div>
+    </ContentHolder>
+
+    <div class="song-modal-section" :class="showModal ? 'active' : ''">
+      <div class="song-modal">
+        <h2>Are you sure you want to delete this song?</h2>
+        <p>This action is un-undoable.</p>
+        <button class="song-modal__delete btn btn--primary" @click="deleteSong()">Delete Song</button>
+        <button class="song-modal__cancel btn btn--light" @click="showModal = false">Cancel</button>
+      </div>
     </div>
-  </ContentHolder>
+  </div>
 </template>
 
 <script>
@@ -62,6 +74,8 @@ export default {
       isLoading: false,
       isUpdated: false,
       isError: false,
+      isDeleted: false,
+      showModal: false,
       initialSong: {}
     };
   },
@@ -145,6 +159,21 @@ export default {
       // Throw an error if the state couldn't be updated
       this.isError = true;
     },
+    deleteSong: async function() {
+      this.isLoading = true;
+
+      const deleteUrl = `${apiUrl}/bands/1/songs/${this.song.id}/destroy`;
+
+      const {
+        data: { success }
+      } = await axios.delete(deleteUrl);
+
+      if (success === 1) {
+        this.isDeleted = true;
+      }
+
+      this.isLoading = false;
+    },
     addUrl: function() {
       this.song.uploadUrls.push({ value: '' });
     },
@@ -182,9 +211,14 @@ export default {
   padding: rem(15px);
 }
 
-.song-edit {
+.song-edit,
+.song-delete {
   align-self: flex-start;
   margin: rem(10px) 0;
+}
+
+.song-delete {
+  display: none;
 }
 
 .update-form {
@@ -210,9 +244,44 @@ export default {
 
   .form-buttons,
   .add-url,
-  .remove-url {
+  .remove-url,
+  .song-delete {
     display: block;
   }
+}
+
+.song-modal-section {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: rem(25px);
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &.active {
+    pointer-events: auto;
+    opacity: 1;
+  }
+}
+
+.song-modal {
+  background-color: #fff;
+  border-radius: rem(3px);
+  box-shadow: $box-shadow;
+  padding: rem(20px);
+}
+
+.song-modal__delete {
+  margin-right: rem(20px);
 }
 
 @media screen and (min-width: $main-break) {
@@ -220,7 +289,8 @@ export default {
     padding: rem(50px);
   }
 
-  .song-edit {
+  .song-edit,
+  .song-delete {
     align-self: flex-end;
   }
 }
