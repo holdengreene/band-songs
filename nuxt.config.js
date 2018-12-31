@@ -7,12 +7,13 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: pkg.name,
+    title: 'PPK',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description },
-      { hid: 'theme', name: 'theme-color', content: '#0069c0' }
+      { hid: 'theme', name: 'theme-color', content: '#0069c0' },
+      { name: 'robots', content: 'noindex' }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },

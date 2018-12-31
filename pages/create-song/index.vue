@@ -117,6 +117,11 @@ export default {
 
       return cleanChords;
     }
+  },
+  head() {
+    return {
+      title: 'PPK - Create A Song'
+    };
   }
 };
 </script>

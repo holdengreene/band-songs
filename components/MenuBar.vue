@@ -5,7 +5,7 @@
     </div>
     <div class="menu__items">
       <nuxt-link to="/">All Songs</nuxt-link>
-      <nuxt-link to="/create-song">Create Song</nuxt-link>
+      <nuxt-link to="/create-song">Create A Song</nuxt-link>
     </div>
   </nav>
 </template>

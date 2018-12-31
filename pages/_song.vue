@@ -242,6 +242,11 @@ export default {
 
       return cleanChords;
     }
+  },
+  head() {
+    return {
+      title: `PPK - ${this.song.title}`
+    };
   }
 };
 </script>
