@@ -32,6 +32,7 @@ export default {
   --success: #8bc34a;
   --warning: #ff5252;
 }
+
 .default {
   background-color: var(--background);
   display: grid;
@@ -61,6 +62,8 @@ footer {
 .btn {
   position: relative;
   border: none;
+  height: auto;
+  line-height: normal;
   font-size: rem(20px);
   color: #000;
   padding: rem(5px);

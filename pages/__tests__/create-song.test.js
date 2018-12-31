@@ -3,7 +3,9 @@ import CreateSong from '~/pages/create-song/index';
 import mockAxios from 'jest-mock-axios';
 
 describe('Create song page', () => {
-  const wrapper = shallowMount(CreateSong);
+  const wrapper = shallowMount(CreateSong, {
+    stubs: ['nuxt-link']
+  });
 
   afterEach(() => {
     // cleaning up the mess left behind the previous test
@@ -70,5 +72,10 @@ describe('Create song page', () => {
     });
 
     expect(wrapper.find('.created')).toBeTruthy();
+  });
+
+  test('the form should be reset', () => {
+    wrapper.find('.reset-form').trigger('click');
+    expect(wrapper.vm.song.title).toEqual('');
   });
 });

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <ContentHolder>
-      <div class="create-wrap" :class="setClasses">
+    <ContentHolder :class="setClasses">
+      <div class="create-wrap">
         <h1 style="text-align:center;">Create A Song</h1>
         <form class="create-song" method="post" @submit.prevent="createSong">
           <label for="title">Song Title</label>
@@ -32,6 +32,13 @@
           <button class="submit-button btn btn--primary">Create Song</button>
         </form>
       </div>
+
+      <div class="created-section">
+        <h1>Song Created</h1>
+        <p>{{ createdSong.title }} has been created. You can either view it or create another if you'd like.</p>
+        <nuxt-link :to="{ path: `/${createdSong.id}` }" class="btn btn--primary">View Song</nuxt-link>
+        <button class="reset-form btn btn--light" @click="resetForm()">Create Another</button>
+      </div>
     </ContentHolder>
   </div>
 </template>
@@ -54,7 +61,8 @@ export default {
         uploadUrls: []
       },
       isLoading: false,
-      isCreated: false
+      isCreated: false,
+      createdSong: {}
     };
   },
   computed: {
@@ -95,11 +103,10 @@ export default {
         uploadUrls: cleanUrls
       });
 
+      this.createdSong = { ...songCreated };
+
       this.isLoading = false;
       this.isCreated = true;
-
-      const newSongId = songCreated.id;
-      this.$router.push({ path: `/${newSongId}?created=true` });
     },
     addUrl: function() {
       this.song.uploadUrls.push({ value: '' });
@@ -116,6 +123,19 @@ export default {
       const cleanChords = Array.from(dedupeChords);
 
       return cleanChords;
+    },
+    resetForm: function() {
+      this.isLoading = false;
+      this.isCreated = false;
+
+      this.song = {
+        title: '',
+        chords: '',
+        description: '',
+        uploadUrls: []
+      };
+
+      this.createdSong = {};
     }
   },
   head() {
@@ -163,6 +183,25 @@ export default {
 
 .song-url {
   width: 85%;
+}
+
+.created-section {
+  display: none;
+  text-align: center;
+}
+
+.created {
+  .create-wrap {
+    display: none;
+  }
+
+  .created-section {
+    display: block;
+
+    .btn {
+      margin: 0 rem(10px);
+    }
+  }
 }
 
 @media screen and (min-width: $main-break) {
