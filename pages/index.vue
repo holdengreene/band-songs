@@ -4,7 +4,12 @@
       <h1>All Songs</h1>
     </div>
     <ContentHolder class="song-section" v-if="getSongs">
-      <input class="song-search" type="text" placeholder="Search Song Titles" v-model="search">
+      <div class="search-section">
+        <input class="song-search" type="text" placeholder="Search Song Titles" v-model="search">
+        <!-- Doesn't actually do anything except allow search data to update on mobile -->
+        <button type="button" class="btn btn--light">Search</button>
+      </div>
+
       <ul class="song-list">
         <SongItem v-for="song in getSongs" :key="song.id" :song="song"/>
       </ul>
@@ -61,9 +66,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.search-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .song-search {
-  align-self: flex-start;
-  width: 80%;
   padding: rem(10px);
   margin: rem(10px) rem(25px);
   border-radius: rem(3px);
@@ -78,7 +87,6 @@ export default {
 
 @media screen and (min-width: $main-break) {
   .song-search {
-    align-self: flex-end;
     width: 40%;
   }
 }
