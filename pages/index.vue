@@ -7,7 +7,7 @@
       <div class="search-section">
         <input class="song-search" type="text" placeholder="Search Song Titles" v-model="search">
         <!-- Doesn't actually do anything except allow search data to update on mobile -->
-        <button type="button" class="btn btn--light">Search</button>
+        <button type="button" class="btn btn--outline">Search</button>
       </div>
 
       <ul class="song-list">

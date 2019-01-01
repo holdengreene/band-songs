@@ -3,8 +3,8 @@
     <ContentHolder :class="infoBox.isEditing ? 'editing' : ''">
       <div class="action-section">
         <SongBanner :song-state="infoBox"/>
-        <button class="song-edit btn btn--primary" @click="editSong()">Edit Song</button>
-        <button class="song-delete btn btn--warning" @click="showModal = true">Delete Song</button>
+        <button class="song-edit btn btn--shadow btn--primary" @click="editSong()">Edit Song</button>
+        <button class="song-delete btn btn--shadow btn--warning" @click="showModal = true">Delete Song</button>
       </div>
       <div class="song-wrap" v-if="noSong === false">
         <form class="update-form" method="post" @submit.prevent="updateSong">
@@ -63,13 +63,13 @@
             <button type="button" class="remove-url" @click="removeUrl(index)">X</button>
           </div>
 
-          <button type="button" class="add-url btn btn--light" @click="addUrl()">Add Url</button>
+          <button type="button" class="add-url btn btn--shadow btn--light" @click="addUrl()">Add Url</button>
 
           <div class="form-buttons">
-            <button class="submit-song btn btn--primary">Update Song</button>
+            <button class="submit-song btn btn--shadow btn--primary">Update Song</button>
             <button
               type="button"
-              class="cancel-song btn btn--light"
+              class="cancel-song btn btn--outline"
               @click="cancelChanges()"
             >Cancel Changes</button>
           </div>
@@ -84,13 +84,13 @@
           <h2>Are you sure you want to delete this song?</h2>
           <p>This action is un-undoable.</p>
 
-          <button class="song-modal__delete btn btn--warning" @click="deleteSong()">Delete Song</button>
-          <button class="song-modal__cancel btn btn--light" @click="showModal = false">Cancel</button>
+          <button class="song-modal__delete btn btn--shadow btn--warning" @click="deleteSong()">Delete Song</button>
+          <button class="song-modal__cancel btn btn--outline" @click="showModal = false">Cancel</button>
         </div>
         <div v-if="isDeleted">
           <h2>Song Deleted!</h2>
           <p v-if="isDeleted">{{ song.title }} has been deleted.</p>
-          <nuxt-link to="/" class="btn btn--primary">View All Songs</nuxt-link>
+          <nuxt-link to="/" class="btn btn--shadow btn--primary">View All Songs</nuxt-link>
         </div>
       </div>
     </div>
@@ -377,7 +377,7 @@ export default {
   }
 
   .add-url {
-    width: 10%;
+    width: 20%;
   }
 
   .song-url {

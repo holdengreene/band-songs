@@ -8,7 +8,7 @@
       </p>
     </div>
     <div class="song-buttons" v-if="song.id">
-      <nuxt-link class="btn btn--primary view-song" :to="song.id.toString()">View Song</nuxt-link>
+      <nuxt-link class="btn btn--shadow btn--primary view-song" :to="song.id.toString()">View Song</nuxt-link>
     </div>
   </li>
 </template>

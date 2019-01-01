@@ -37,7 +37,7 @@ module.exports = {
    ** Nuxt.js modules
    */
   modules: [
-    // Doc: https://github.com/nuxt-community/axios-module#usage
+    ['@nuxtjs/pwa', { meta: false }],
     '@nuxtjs/axios',
     ['nuxt-sass-resources-loader', ['~assets/scss/modules/_variables.scss']]
   ],

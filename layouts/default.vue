@@ -60,6 +60,7 @@ footer {
 }
 
 .btn {
+  cursor: pointer;
   position: relative;
   border: none;
   height: auto;
@@ -68,13 +69,16 @@ footer {
   color: #000;
   padding: rem(5px);
   border-radius: rem(3px);
-  box-shadow: $box-shadow;
-  transition: background-color 0.3s ease;
 
   &:hover {
     text-decoration: none;
     color: inherit;
   }
+}
+
+.btn--shadow {
+  box-shadow: $box-shadow;
+  transition: background-color 0.3s ease;
 
   &::after {
     content: '';
@@ -98,12 +102,10 @@ footer {
 
 .btn--primary {
   background-color: var(--secondary);
-  font-weight: 700;
 
   &:hover,
   &:focus {
     outline: 0;
-    cursor: pointer;
     background-color: var(--secondary-light);
   }
 }
@@ -114,7 +116,6 @@ footer {
   &:hover,
   &:focus {
     outline: 0;
-    cursor: pointer;
     background-color: #e3e3e3;
   }
 }
@@ -127,8 +128,38 @@ footer {
   &:focus {
     color: #fff;
     outline: 0;
-    cursor: pointer;
     background-color: #ff7474;
+  }
+}
+
+.btn--outline {
+  padding: rem(5px) rem(15px);
+  color: var(--main-dark);
+  border: rem(1px) solid $border-dark;
+  z-index: 1;
+
+  &:hover,
+  &:focus {
+    color: var(--main-dark);
+    outline: 0;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-dark);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::after,
+  &:focus::after {
+    opacity: 0.2;
   }
 }
 

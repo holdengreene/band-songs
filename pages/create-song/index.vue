@@ -28,16 +28,16 @@
             <button type="button" class="remove-url" @click="removeUrl(index)">X</button>
           </div>
 
-          <button type="button" class="add-url btn btn--light" @click="addUrl()">Add URL</button>
-          <button class="submit-button btn btn--primary">Create Song</button>
+          <button type="button" class="add-url btn btn--shadow btn--light" @click="addUrl()">Add URL</button>
+          <button class="submit-button btn btn--shadow btn--primary">Create Song</button>
         </form>
       </div>
 
       <div class="created-section">
         <h1>Song Created</h1>
         <p>{{ createdSong.title }} has been created. You can either view it or create another if you'd like.</p>
-        <nuxt-link :to="{ path: `/${createdSong.id}` }" class="btn btn--primary">View Song</nuxt-link>
-        <button class="reset-form btn btn--light" @click="resetForm()">Create Another</button>
+        <nuxt-link :to="{ path: `/${createdSong.id}` }" class="btn btn--shadow btn--primary">View Song</nuxt-link>
+        <button class="reset-form btn btn--shadow btn--light" @click="resetForm()">Create Another</button>
       </div>
     </ContentHolder>
   </div>
@@ -210,7 +210,7 @@ export default {
   }
 
   .add-url {
-    width: 10%;
+    width: 20%;
   }
 
   .song-url {
