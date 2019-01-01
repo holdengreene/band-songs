@@ -1,6 +1,6 @@
 <template>
   <li class="song-item">
-    <nuxt-link class="song-link" :to="song.id.toString()">
+    <nuxt-link v-if="song.id" class="song-link" :to="song.id.toString()">
       <div class="song-info">
         <h3>{{ song.title }}</h3>
         <p class="chords">
@@ -8,7 +8,7 @@
           {{ getChords }}
         </p>
       </div>
-      <div class="song-buttons" v-if="song.id">
+      <div class="song-buttons">
         <button class="btn btn--text view-song">View Song</button>
       </div>
     </nuxt-link>
