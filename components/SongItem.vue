@@ -1,15 +1,17 @@
 <template>
   <li class="song-item">
-    <div class="song-info">
-      <h3>{{ song.title }}</h3>
-      <p class="chords">
-        <span class="chords--span">Chords:</span>
-        {{ getChords }}
-      </p>
-    </div>
-    <div class="song-buttons" v-if="song.id">
-      <nuxt-link class="btn btn--shadow btn--primary view-song" :to="song.id.toString()">View Song</nuxt-link>
-    </div>
+    <nuxt-link class="song-link" :to="song.id.toString()">
+      <div class="song-info">
+        <h3>{{ song.title }}</h3>
+        <p class="chords">
+          <span class="chords--span">Chords:</span>
+          {{ getChords }}
+        </p>
+      </div>
+      <div class="song-buttons" v-if="song.id">
+        <button class="btn btn--text view-song">View Song</button>
+      </div>
+    </nuxt-link>
   </li>
 </template>
 
@@ -38,9 +40,15 @@ export default {
 
 <style lang="scss" scoped>
 .song-item {
+  border-bottom: rem(1px) solid $border-light;
+}
+
+.song-link {
+  color: inherit;
+  text-decoration: none;
   display: flex;
   flex-direction: column;
-  border-bottom: rem(1px) solid $border-light;
+  width: 100%;
 }
 
 .chords--span {
@@ -52,17 +60,15 @@ export default {
   margin: rem(20px) 0;
 }
 
-.view-song {
-  font-weight: 400;
-  padding: rem(10px) rem(20px);
-}
-
 @media screen and (min-width: $main-break) {
   .song-item {
+    margin: rem(20px) 0;
+  }
+
+  .song-link {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin: rem(20px) 0;
   }
 }
 </style>

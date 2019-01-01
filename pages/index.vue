@@ -83,6 +83,7 @@ export default {
 .song-list {
   list-style: none;
   padding: 0 rem(25px);
+  margin-top: rem(25px);
 }
 
 @media screen and (min-width: $main-break) {

@@ -163,6 +163,35 @@ footer {
   }
 }
 
+.btn--text {
+  color: var(--main-dark);
+  z-index: 1;
+  transition: background-color 0.3s ease;
+  overflow: hidden;
+
+  &:hover {
+    color: var(--main-dark);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-dark);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::after,
+  &:focus::after {
+    opacity: 0.2;
+  }
+}
+
 // Form styles
 label {
   font-size: rem(24px);
