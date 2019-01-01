@@ -1,8 +1,8 @@
 import { shallowMount } from '@vue/test-utils';
-import MenuBar from '~/components/MenuBar';
+import MenuSidebar from '~/components/MenuSidebar';
 
-describe('Create menu bar', () => {
-  const wrapper = shallowMount(MenuBar, {
+describe('Create song banner', () => {
+  const wrapper = shallowMount(MenuSidebar, {
     stubs: ['nuxt-link']
   });
 

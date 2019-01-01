@@ -1,16 +1,32 @@
 <template>
-  <nav class="menu">
+  <div class="menu">
+    <button class="menu__toggle" @click="navOpened = !navOpened"/>
+
+    <MenuSidebar :open="navOpened" @update:navOpened="navOpened = $event"/>
+
     <div class="menu__title">
       <nuxt-link to="/">
-        <img class="title__image" src="/logo-white.svg" alt="PPK Logo">
+        <img class="title__image" src="~assets/img/logo-white.svg" alt="PPK Logo">
       </nuxt-link>
     </div>
-    <div class="menu__items">
-      <nuxt-link to="/">All Songs</nuxt-link>
-      <nuxt-link to="/create-song">Create A Song</nuxt-link>
-    </div>
-  </nav>
+  </div>
 </template>
+
+<script>
+import MenuSidebar from '~/components/MenuSidebar.vue';
+
+export default {
+  components: {
+    MenuSidebar
+  },
+  data() {
+    return {
+      navOpened: false
+    };
+  }
+};
+</script>
+
 
 <style lang="scss" scoped>
 .menu {
@@ -21,26 +37,25 @@
   align-items: center;
 }
 
+.menu__toggle {
+  background-image: url('~assets/img/menu-icon.svg');
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  height: rem(32px);
+  width: rem(32px);
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+
 .menu__title a {
   font-size: rem(24px);
   color: #000;
   cursor: pointer;
   text-decoration: none;
-}
-
-.menu__items a {
-  color: #000;
-  cursor: pointer;
-  margin-right: rem(10px);
-  padding: rem(5px);
-
-  &.nuxt-link-exact-active {
-    background-color: var(--main-light);
-  }
-
-  &:focus {
-    text-decoration: none;
-  }
 }
 
 .title__image {
@@ -51,11 +66,6 @@
 @media screen and (min-width: $main-break) {
   .menu {
     padding: rem(15px) rem(50px);
-  }
-
-  .menu__items a {
-    font-size: rem(20px);
-    margin-right: rem(25px);
   }
 }
 </style>

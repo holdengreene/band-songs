@@ -25,7 +25,7 @@ export default {
   --main-color: #2196f3;
   --main-light: #6ec6ff;
   --main-dark: #0069c0;
-  --secondary: #fff176;
+  --secondary-color: #fff176;
   --secondary-light: #ffffa8;
   --secondary-dark: #cabf45;
   --background: #f5f5f6;
@@ -45,7 +45,7 @@ export default {
   position: relative;
 }
 
-nav {
+.menu {
   grid-area: nav;
 }
 
@@ -61,6 +61,7 @@ footer {
 
 .btn {
   cursor: pointer;
+  background-color: transparent;
   position: relative;
   border: none;
   height: auto;
@@ -101,7 +102,7 @@ footer {
 }
 
 .btn--primary {
-  background-color: var(--secondary);
+  background-color: var(--secondary-color);
 
   &:hover,
   &:focus {
