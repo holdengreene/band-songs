@@ -1,7 +1,9 @@
 <template>
   <nav class="menu">
     <div class="menu__title">
-      <nuxt-link to="/">PPK</nuxt-link>
+      <nuxt-link to="/">
+        <img class="title__image" src="/logo-white.svg" alt="PPK Logo">
+      </nuxt-link>
     </div>
     <div class="menu__items">
       <nuxt-link to="/">All Songs</nuxt-link>
@@ -39,6 +41,11 @@
   &:focus {
     text-decoration: none;
   }
+}
+
+.title__image {
+  height: rem(55px);
+  width: 100%;
 }
 
 @media screen and (min-width: $main-break) {

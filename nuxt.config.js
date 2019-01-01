@@ -37,7 +37,15 @@ module.exports = {
    ** Nuxt.js modules
    */
   modules: [
-    ['@nuxtjs/pwa', { meta: false }],
+    [
+      '@nuxtjs/pwa',
+      {
+        meta: false,
+        manifest: {
+          theme_color: '#0069c0'
+        }
+      }
+    ],
     '@nuxtjs/axios',
     ['nuxt-sass-resources-loader', ['~assets/scss/modules/_variables.scss']]
   ],
