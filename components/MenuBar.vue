@@ -33,7 +33,6 @@ export default {
   background-color: var(--main-color);
   padding: rem(15px);
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
@@ -51,11 +50,9 @@ export default {
   }
 }
 
-.menu__title a {
-  font-size: rem(24px);
-  color: #000;
+.menu__title {
+  margin-left: rem(30px);
   cursor: pointer;
-  text-decoration: none;
 }
 
 .title__image {
