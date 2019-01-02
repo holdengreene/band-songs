@@ -5,7 +5,6 @@
   "author": "Holden Greene",
   "private": true,
   "scripts": {
-    "now-build": "nuxt build --spa --modern=client",
     "dev": "nuxt",
     "build": "nuxt build --modern=client",
     "start": "nuxt start --modern=client",

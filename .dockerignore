@@ -1,0 +1,10 @@
+node_modules
+.nuxt
+nginx
+.vscode
+README.md
+.editorconfig
+.eslintignore
+.eslintrc.js
+.gitignore
+.prettierrc
