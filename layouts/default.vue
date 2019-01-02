@@ -39,7 +39,7 @@ h3,
 h4,
 h5,
 label {
-  font-family: 'Spectral', serif;
+  font-family: 'Lora', serif;
 }
 
 h1 {
