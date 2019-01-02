@@ -2,7 +2,7 @@
   <div>
     <ContentHolder :class="setClasses">
       <div class="create-wrap">
-        <h1 style="text-align:center;">Create A Song</h1>
+        <h1 class="center-txt">Create A Song</h1>
         <form class="create-song" method="post" @submit.prevent="createSong">
           <label for="title">Song Title</label>
           <input class="song-title" name="title" type="text" v-model="song.title" required>

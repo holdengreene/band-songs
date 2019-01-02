@@ -87,6 +87,10 @@ h5 {
   grid-area: content;
 }
 
+.center-txt {
+  text-align: center;
+}
+
 footer {
   grid-area: footer;
 }
