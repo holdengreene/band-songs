@@ -33,6 +33,38 @@ export default {
   --warning: #ff5252;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+label {
+  font-family: 'Spectral', serif;
+}
+
+h1 {
+  font-size: rem(40px);
+}
+
+h2 {
+  font-size: rem(36px);
+}
+
+h3 {
+  font-size: rem(32px);
+  font-weight: 400;
+}
+
+h4 {
+  font-size: rem(28px);
+  font-weight: 400;
+}
+
+h5 {
+  font-size: rem(24px);
+  font-weight: 400;
+}
+
 .default {
   background-color: var(--background);
   display: grid;
@@ -68,7 +100,7 @@ footer {
   line-height: normal;
   font-size: rem(20px);
   color: #000;
-  padding: rem(5px);
+  padding: rem(5px) rem(15px);
   border-radius: rem(3px);
 
   &:hover {

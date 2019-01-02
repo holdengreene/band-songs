@@ -15,7 +15,13 @@ module.exports = {
       { hid: 'theme', name: 'theme-color', content: '#0069c0' },
       { name: 'robots', content: 'noindex' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      {
+        href: 'https://fonts.googleapis.com/css?family=Spectral:400,700',
+        rel: 'stylesheet'
+      }
+    ]
   },
 
   /*
