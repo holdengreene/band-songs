@@ -1,8 +1,8 @@
 FROM node:10-alpine
 
-ENV APP_ROOT /src
+ENV APP_ROOT /usr/src/app
 
-RUN mkdir ${APP_ROOT}
+# RUN mkdir ${APP_ROOT}
 WORKDIR ${APP_ROOT}
 ADD . ${APP_ROOT}
 
@@ -14,3 +14,5 @@ RUN yarn build
 # RUN rm -r components layouts pages plugins
 
 ENV HOST 0.0.0.0
+
+CMD ["yarn", "start"]
