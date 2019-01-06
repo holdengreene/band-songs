@@ -59,7 +59,7 @@ describe('Create song page', () => {
     };
 
     expect(mockAxios.post).toHaveBeenCalledWith(
-      'http://localhost:8080/bands/1/songs/create',
+      'http://api.ppandthekids.local/bands/1/songs/create',
       expectedSong
     );
 

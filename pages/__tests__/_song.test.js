@@ -74,7 +74,7 @@ describe('Song page', () => {
     };
 
     expect(mockAxios.post).toHaveBeenCalledWith(
-      'http://localhost:8080/bands/1/songs/1/update',
+      'http://api.ppandthekids.local/bands/1/songs/1/update',
       expectedSong
     );
 
@@ -111,7 +111,7 @@ describe('Song page', () => {
     wrapper.find('.song-modal__delete').trigger('click');
 
     expect(mockAxios.delete).toHaveBeenCalledWith(
-      'http://localhost:8080/bands/1/songs/1/destroy'
+      'http://api.ppandthekids.local/bands/1/songs/1/destroy'
     );
 
     mockAxios.mockResponse({
