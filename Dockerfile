@@ -1,4 +1,4 @@
-FROM node:10-alpine
+FROM keymetrics/pm2:10-alpine
 
 ENV APP_ROOT /usr/src/app
 
@@ -15,4 +15,4 @@ RUN yarn build
 
 ENV HOST 0.0.0.0
 
-CMD ["yarn", "start"]
+CMD [ "pm2-runtime", "start", "pm2.json" ]
