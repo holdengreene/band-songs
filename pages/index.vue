@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="top-section">
-      <h1 class="center-txt">All Songs</h1>
+      <h1>All Songs</h1>
     </div>
     <ContentHolder class="song-section" v-if="getSongs">
       <div class="search-section">

@@ -158,8 +158,7 @@ export default {
 
 .submit-button {
   margin-top: rem(50px);
-  width: 100%;
-  align-self: center;
+  align-self: flex-end;
 }
 
 .add-url {
@@ -183,6 +182,7 @@ export default {
 
 .song-url {
   width: 85%;
+  margin-top: initial;
 }
 
 .created-section {
@@ -205,10 +205,6 @@ export default {
 }
 
 @media screen and (min-width: $main-break) {
-  .submit-button {
-    width: 50%;
-  }
-
   .add-url {
     width: 20%;
   }

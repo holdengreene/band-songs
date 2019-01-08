@@ -52,7 +52,6 @@ export default {
 }
 
 .chords--span {
-  color: var(--main-dark);
   font-weight: 600;
 }
 

@@ -39,7 +39,7 @@ h3,
 h4,
 h5,
 label {
-  font-family: 'Lora', serif;
+  font-family: 'Oswald', sans-serif;
 }
 
 h1 {
@@ -66,13 +66,14 @@ h5 {
 }
 
 .default {
+  --grid-columns: #{rem(15px)} 1fr #{rem(15px)};
   background-color: var(--background);
   display: grid;
   grid-template-areas:
     'nav nav nav'
     '. content . '
     'footer footer footer';
-  grid-template-columns: rem(15px) 1fr rem(15px);
+  grid-template-columns: var(--grid-columns);
   gap: rem(25px) 0;
   position: relative;
 }
@@ -138,7 +139,8 @@ footer {
 }
 
 .btn--primary {
-  background-color: var(--secondary-color);
+  --btn-hover: var(--secondary-color);
+  background-color: var(--btn-hover);
 
   &:hover,
   &:focus {
@@ -148,36 +150,39 @@ footer {
 }
 
 .btn--light {
-  background-color: var(--background);
+  --btn-hover: var(--background);
+  background-color: var(--btn-hover);
 
   &:hover,
   &:focus {
     outline: 0;
-    background-color: #e3e3e3;
+    --btn-hover: #e3e3e3;
   }
 }
 
 .btn--warning {
-  background-color: var(--warning);
+  --btn-hover: var(--warning);
+  background-color: var(--btn-hover);
   color: #fff;
 
   &:hover,
   &:focus {
     color: #fff;
     outline: 0;
-    background-color: #ff7474;
+    --btn-hover: #ff7474;
   }
 }
 
 .btn--outline {
+  --btn-hover: var(--main-dark);
+  color: var(--btn-hover);
   padding: rem(5px) rem(15px);
-  color: var(--main-dark);
   border: rem(1px) solid $border-dark;
   z-index: 1;
 
   &:hover,
   &:focus {
-    color: var(--main-dark);
+    --btn-hover: var(--main-dark);
     outline: 0;
   }
 
@@ -201,13 +206,14 @@ footer {
 }
 
 .btn--text {
-  color: var(--main-dark);
+  --btn-hover: var(--main-dark);
+  color: var(--btn-hover);
   z-index: 1;
   transition: background-color 0.3s ease;
   overflow: hidden;
 
   &:hover {
-    color: var(--main-dark);
+    --btn-hover: var(--main-dark);
   }
 
   &::after {
@@ -268,7 +274,7 @@ form p {
 
 @media screen and (min-width: $main-break) {
   .default {
-    grid-template-columns: 1fr 3fr 1fr;
+    --grid-columns: 1fr 3fr 1fr;
   }
 }
 </style>

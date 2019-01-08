@@ -18,7 +18,7 @@ module.exports = {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     link: [
       {
-        href: 'https://fonts.googleapis.com/css?family=Lora:400,700',
+        href: 'https://fonts.googleapis.com/css?family=Oswald:400,700',
         rel: 'stylesheet'
       }
     ]

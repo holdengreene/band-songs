@@ -42,7 +42,7 @@ export default {
 .info {
   position: relative;
   padding: rem(20px);
-  width: 50%;
+  margin: 0 rem(10px);
   text-align: center;
   font-size: rem(20px);
   border-radius: rem(3px);

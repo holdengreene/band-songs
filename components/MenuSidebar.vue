@@ -125,23 +125,25 @@ export default {
 }
 
 .side-nav__content a {
+  --link-hover: transparent;
   color: #000;
   height: rem(48px);
   line-height: rem(48px);
   padding: 0 rem(16px);
   text-decoration: none;
+  background-color: var(--link-hover);
 
   &.nuxt-link-exact-active {
-    background-color: var(--secondary-light);
+    --link-hover: var(--secondary-light);
     font-weight: 600;
 
     &:hover {
-      background-color: var(--secondary-light);
+      --link-hover: var(--secondary-light);
     }
   }
 
   &:hover {
-    background: var(--background);
+    --link-hover: var(--background);
   }
 }
 </style>
