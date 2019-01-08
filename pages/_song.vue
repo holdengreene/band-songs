@@ -324,7 +324,7 @@ export default {
 
   .form-buttons {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     margin-top: rem(25px);
 
     .btn {

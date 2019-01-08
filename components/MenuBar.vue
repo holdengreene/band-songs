@@ -34,6 +34,7 @@ export default {
   padding: rem(15px);
   display: flex;
   align-items: center;
+  box-shadow: $box-shadow;
 }
 
 .menu__toggle {
