@@ -66,16 +66,16 @@ h5 {
 }
 
 .default {
-  --grid-columns: #{rem(15px)} 1fr #{rem(15px)};
   background-color: var(--background);
   display: grid;
   grid-template-areas:
     'nav nav nav'
-    '. content . '
+    '. content .'
     'footer footer footer';
-  grid-template-columns: var(--grid-columns);
+  // grid-template-columns: rem(15px) 1fr rem(15px);
   gap: rem(25px) 0;
   position: relative;
+  overflow: hidden;
 }
 
 .menu {
@@ -274,7 +274,7 @@ form p {
 
 @media screen and (min-width: $main-break) {
   .default {
-    --grid-columns: 1fr 3fr 1fr;
+    grid-template-columns: 1fr 3fr 1fr;
   }
 }
 </style>
